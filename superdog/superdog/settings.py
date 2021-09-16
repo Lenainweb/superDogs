@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'modeltranslation'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'registration_of_dogs.apps.RegistrationOfDogsConfig',
+    'modeltranslation',
+    
 ]
 
 MIDDLEWARE = [
@@ -48,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'superdog.urls'
@@ -114,6 +118,17 @@ USE_L10N = True
 
 USE_TZ = True
 
+# указываем, где лежат файлы перевода
+# LOCALE_PATHS = ('/superdog/locale/',
+# )
+
+gettext = lambda s: s
+# список доступных языков
+LANGUAGES = (
+    ('ru', gettext('Russian')),
+    ('ua', gettext('Ukrainian')),
+    ('en', gettext('English')),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

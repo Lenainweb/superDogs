@@ -1,6 +1,8 @@
 from django.db import models
 
-from django.db import models
+class AboutUs(models.Model):
+    title = models.CharField(max_length=50)
+    content = models.TextField()
+    published = models.DateTimeField(auto_now_add=True, db_index=True)
 
-class Bd(models.Model):
-    pass
+# b1 = AboutUs(titel = "Amber dog", content = "Welcom:)")

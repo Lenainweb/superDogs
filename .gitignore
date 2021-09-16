@@ -1,6 +1,6 @@
 __pycache__
 ./
-/env
+/env_dog
 data
 *.pyc
 *.db
