@@ -10,21 +10,54 @@ class AboutUs(models.Model):
 
 class RegistrationExhibition(models.Model):
     '''данные с сайта с формой регистрации'''
-    # TYPE OF EXHIBITION
-    # EXHIBITION VENUE
-    # BREED / RACE
-    # THE NAME OF THE DOG
-    # TATTOO NUMBER / MICROCHIP
-    # STUDBOOK AND REGISTRATION NUMBE
-    # DATE OF BIRTH
-    # THE FATHER OF THE DOG
-    # MOTHER DOG
-    # BREEDER'S NAME
-    # BREEDER'S ADDRESS
-    # NAME OF OWNER
-    # OWNER ADDRESS
-    # GENDER
-    # THE CLASS
+    type_of_exebition = models.CharField(max_length=50)# TYPE OF EXHIBITION
+    exebition_venue = models.CharField(max_length=50)# EXHIBITION VENUE
+    breed_race = models.CharField(max_length=50)# BREED / RACE
+    name_of_dog = models.CharField(max_length=50)# THE NAME OF THE DOG
+    tattoo_number_microchip = models.CharField(max_length=50)# TATTOO NUMBER / MICROCHIP
+    studbook_and_registration = models.CharField(max_length=50)# STUDBOOK AND REGISTRATION NUMBE
+    date_of_birth = models.CharField(max_length=50)# DATE OF BIRTH
+    father_of_dog = models.CharField(max_length=50)# THE FATHER OF THE DOG
+    mother_of_dog = models.CharField(max_length=50)# MOTHER DOG
+    breeder_name = models.CharField(max_length=50)# BREEDER'S NAME
+    breeder_address = models.CharField(max_length=50)# BREEDER'S ADDRESS
+    name_of_owner = models.CharField(max_length=50)# NAME OF OWNER
+    owner_address = models.CharField(max_length=50)# OWNER ADDRESS
+    gender = models.CharField(max_length=50)# GENDER
+    the_class = models.CharField(max_length=50)# THE CLASS
+    
+            
+    
+    # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - FRONT SIDE
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    pedigree_of_dog_scanned_front = models.CharField(max_length=50)
+    
+    # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - BACK SIDE
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    pedigree_of_dog_scanned_back = models.CharField(max_length=50)
+
+    # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    champion_certificate_scanned = models.CharField(max_length=50)
+
+    # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    proof_of_peyment_scanned = models.CharField(max_length=50)
+
+    contact_email = models.EmailField() # Contact e-mail
+    # I confirm that I have become acquainted with the processing of personal data in OZKnS and I hereby give my consent.
+    # I agree with the processing of personal data under the GDPR Act.
+    # Confirm
+    pass
+
+class AgreePersonalData(models.Model):
+    '''данные с сайта с формой регистрации'''
+    # I confirm that I have become acquainted with the processing of personal data in OZKnS and I hereby give my consent.
+    # I agree with the processing of personal data under the GDPR Act.
+    pass
+
+class CategoryExebition(models.Model):
+    '''данные с сайта с формой регистрации'''
     #     YOUNGER PUPPY 3-6 months up to 35cm
     #     YOUNGER PUPPY 3-6 months over 35cm
     #     PUPPY 6-9 months to 35cm
@@ -43,23 +76,8 @@ class RegistrationExhibition(models.Model):
     #     Final competitions - The most beautiful PAIR of DOGS
     #     Final competitions - The most beautiful BREEDING GROUP
     #     Final competitions - CHILD AND DOG
-    # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - FRONT SIDE
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-
-    # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - BACK SIDE
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-
-    # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-
-    # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-
-    # Contact e-mail
-    # I confirm that I have become acquainted with the processing of personal data in OZKnS and I hereby give my consent.
-    # I agree with the processing of personal data under the GDPR Act.
-    # Confirm
     pass
+
 
 class Fees(models.Model):
     position = models.TextField()
