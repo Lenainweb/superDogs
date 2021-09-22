@@ -1,29 +1,33 @@
-from django.forms import formsets
 from django.shortcuts import redirect, render
+from django.views.generic import TemplateView
 
 from .models import AboutUs, RegistrationExhibition
 from .forms import RegistrationExhibitionForm
 
-# Create your views here.
+class HomePageView(TemplateView):
+    
+    def get(self, request, **kwargs):
+        date = AboutUs.objects.last()
+        # print (date.title)
+        return render(request, 'registration_of_dogs/index.html', context = {'title' : date.title, 'content': date.content})
 
-def index(request):
-    date = AboutUs.objects.last()
-    # print (date.title)
-    return render(request, 'registration_of_dogs/index.html', context = {'title' : date.title, 'content': date.content})
 
-
-def registration_exhibition(request):
-    registration_exhibition_form = RegistrationExhibitionForm()
-
-    if request.method == 'POST':
-            formset = registration_exhibition_form(request.POST)
-            if formset.is_valid():
-                formset.save()
-                return redirect('')
-    else:
-        formset = registration_exhibition_form
-    context = {'formset': formset}
-    return render (request, 'registration_of_dogs/registration_exhibition.html', context)
+class RegistrationExhibitionView(TemplateView):
+    
+    def get(self, request, **kwargs):
+        
+        form = RegistrationExhibitionForm()
+        return render (request, 'registration_of_dogs/registration_exhibition.html', context = {'form': form})
+        
+    def post(self, request, **kwards):    
+        
+        form = RegistrationExhibitionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('')
+        else:
+            pass
+        
 
     # date = RegistrationExhibition.objects()
     # print (date.title)
