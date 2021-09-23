@@ -36,7 +36,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'modeltranslation'
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,8 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'registration_of_dogs.apps.RegistrationOfDogsConfig',
-    'modeltranslation',
-    
+        
 ]
 
 MIDDLEWARE = [
@@ -124,13 +122,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# gettext = lambda s: s
-# # список доступных языков
-# LANGUAGES = (
-#     ('ru', gettext('Russian')),
-#     ('ua', gettext('Ukrainian')),
-#     ('en', gettext('English')),
-# # )
 
 LANGUAGES = [
     ('af', gettext_noop('Afrikaans')),
@@ -239,6 +230,9 @@ LANGUAGES_BIDI = ["he", "ar", "ar-dz", "fa", "ur"]
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOCALE_PATHS = [
+    BASE_DIR / 'registration_of_dogs/locale/',]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
