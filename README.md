@@ -13,8 +13,10 @@ $ cd superdog
 ##### Initialize a virtualenv
 
 ```
-$ python3.9 -m venv venv
-$ . venv/bin/activate
+$ python3.9 -m venv env_dog
+$ . env_dog/bin/activate 
+or
+env_dog\Scripts\activate
 ```
 
 ##### Install the dependencies
