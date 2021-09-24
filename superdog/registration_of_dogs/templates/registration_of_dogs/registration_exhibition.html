@@ -1,10 +1,74 @@
 {% extends 'registration_of_dogs/layout.html' %}
 
 {% block content %}
+    <div class="container-fluid" id="form-center">
     <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Подать заявку"/>
+        
+            <legend>Registration</legend>          
+                {% csrf_token %}
+                <p>{{form.type_of_exebition.label}}<br>
+                {{form.type_of_exebition}}</p>
+
+                <p>{{form.exebition_venue.label}}<br>
+                {{form.exebition_venue}}</p>
+
+                <p>{{form.breed_race.label}}<br>
+                {{form.breed_race}}</p>
+
+                <p>{{form.name_of_dog.label}}<br>
+                {{form.name_of_dog}}</p>
+
+                <p>{{form.tattoo_number_microchip.label}}<br>
+                {{form.tattoo_number_microchip}}</p>
+
+                <p>{{form.studbook_and_registration.label}}<br>
+                {{form.studbook_and_registration}}</p>
+
+                <p>{{form.date_of_birth.label}}<br>
+                {{form.date_of_birth}}</p>
+
+                <p>{{form.father_of_dog.label}}<br>
+                {{form.father_of_dog}}</p>
+
+                <p>{{form.mother_of_dog.label}}<br>
+                {{form.mother_of_dog}}</p>
+
+                <p>{{form.breeder_name.label}}<br>
+                {{form.breeder_name}}</p>
+
+                <p>{{form.breeder_address.label}}<br>
+                {{form.breeder_address}}</p>
+
+                <p>{{form.name_of_owner.label}}<br>
+                {{form.name_of_owner}}</p>
+
+                <p>{{form.owner_address.label}}<br>
+                {{form.owner_address}}</p>
+
+                <p>{{form.gender.label}}<br>
+                {{form.gender}}</p>
+
+                <p>{{form.the_class.label}}<br>
+                {{form.the_class}}</p>
+
+                <p>{{form.pedigree_of_dog_scanned_front.label}}<br>
+                {{form.pedigree_of_dog_scanned_front}}</p>
+
+                <p>{{form.pedigree_of_dog_scanned_back.label}}<br>
+                {{form.pedigree_of_dog_scanned_back}}</p>
+
+                <p>{{form.champion_certificate_scanned.label}}<br>
+                {{form.champion_certificate_scanned}}</p>
+
+                <p>{{form.proof_of_peyment_scanned.label}}<br>
+                {{form.proof_of_peyment_scanned}}</p>
+
+                <p>{{form.contact_email.label}}<br>
+                {{form.contact_email}}</p>
+
+        <input type="submit" class="btn btn-primary" value="Подать заявку"/>
+
     </form>
+</div>
 
 {% endblock %}
