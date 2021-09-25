@@ -1,5 +1,5 @@
 from django import forms
-from .models import RegistrationExhibition, AgreePersonalData
+from .models import RegistrationExhibition
 
 class RegistrationExhibitionForm(forms.ModelForm):
     class Meta:
@@ -18,7 +18,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
             'name_of_owner', 
             'owner_address', 
             'gender', 
-            'the_class',
+            'class_of_exebition',
             'pedigree_of_dog_scanned_front', 
             'pedigree_of_dog_scanned_back', 
             'champion_certificate_scanned', 
