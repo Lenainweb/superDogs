@@ -9,7 +9,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
     
     class Meta:
         model = RegistrationExhibition
-        fields = ('type_of_exebition', 
+        fields = ( 
             'exebition_venue',
             'breed_race', 
             'name_of_dog', 

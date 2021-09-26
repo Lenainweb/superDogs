@@ -9,6 +9,25 @@ class AboutUs(models.Model):
 
 # b1 = AboutUs(titel = "Amber dog", content = "Welcom:)")
 
+class Exhibitions(models.Model):
+
+    class AddClassesOfEexebition(models.TextChoices):
+        WORKING = '15', _("WORKING from 12 months - Certificate of examination")
+        PAIR_DOGS = '16', _("Final competitions - The most beautiful PAIR of DOGS")
+        BREEDING_GROUP = '17', _("Final competitions - The most beautiful BREEDING GROUP")
+        CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
+
+    class StatusOfExebition(models.IntegerChoices):
+        CLOSE = 0, "Close"
+        OPEN = 1, "Open"
+        
+    type_of_exebition = models.CharField(_("Тип выставки"), help_text= _("Тип выставки"), max_length=160)# TYPE OF EXHIBITION
+    date_of_exebition = models.DateTimeField()
+    address_of_exebition = models.TextField()
+    add_classes_of_exebition = models.TextField(_("Дополнительные категории"), choices=AddClassesOfEexebition.choices)# THE ADD CLASS
+    status_of_exebition = models.IntegerField(_("Статус выставки"), choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
+
+
 class RegistrationExhibition(models.Model):
 
     class GenderDog(models.IntegerChoices):
@@ -38,7 +57,7 @@ class RegistrationExhibition(models.Model):
 
 
     '''данные с сайта с формой регистрации'''
-    type_of_exebition = models.CharField(_("Тип выставки"), help_text= _("Тип выставки"), max_length=160)# TYPE OF EXHIBITION
+    
     exebition_venue = models.CharField("Место проведения", max_length=160)# EXHIBITION VENUE
     breed_race = models.CharField("Порода", max_length=50)# BREED / RACE
     name_of_dog = models.CharField("Кличка", max_length=50)# THE NAME OF THE DOG
@@ -51,7 +70,7 @@ class RegistrationExhibition(models.Model):
     breeder_address = models.CharField("Адрес заводчика", max_length=50)# BREEDER'S ADDRESS
     name_of_owner = models.CharField("Имя хозяина", max_length=50)# NAME OF OWNER
     owner_address = models.CharField("Адрес хозяина", max_length=50)# OWNER ADDRESS
-    gender = models.IntegerField("Пол", choices=GenderDog.choices)# GENDER
+    gender = models.IntegerField("Пол", choices=GenderDog.choices, default=GenderDog.MALE)# GENDER
     class_of_exebition = models.TextField("Категория", choices=ClassOfEexebition.choices)# THE CLASS
     
             
