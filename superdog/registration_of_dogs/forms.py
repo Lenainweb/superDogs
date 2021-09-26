@@ -1,16 +1,18 @@
 # from django.contrib.admin.widgets import AdminDateWidget
 from django.utils.translation import gettext_lazy as _
 from django import forms
-from .models import RegistrationExhibition
+from .models import RegistrationExhibition, Exebitions
 
 class RegistrationExhibitionForm(forms.ModelForm):
     
-    date_of_birth = forms.DateField(label=_("Дата рождения"), widget= forms.SelectDateWidget()) 
+    date_of_birth = forms.DateField(label=_("Дата рождения"), widget= forms.SelectDateWidget())
+    exebition_type = forms.ModelChoiceField(queryset=Exebitions.objects.all(), empty_label=None)
+    exebition_venue = forms.ModelChoiceField(queryset=Exebitions.objects.all(), empty_label=None)
+    
     
     class Meta:
         model = RegistrationExhibition
         fields = ( 
-            'exebition_venue',
             'breed_race', 
             'name_of_dog', 
             'tattoo_number_microchip',

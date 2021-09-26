@@ -7,9 +7,11 @@ class AboutUs(models.Model):
     content = models.TextField()
     published = models.DateTimeField(auto_now_add=True, db_index=True)
 
-# b1 = AboutUs(titel = "Amber dog", content = "Welcom:)")
+    def __str__(self) -> str:
+        return self.title, self.content
 
-class Exhibitions(models.Model):
+class Exebitions(models.Model):
+    # from registrarion_of_dogs.models import Exebitions
 
     class AddClassesOfEexebition(models.TextChoices):
         WORKING = '15', _("WORKING from 12 months - Certificate of examination")
@@ -21,12 +23,17 @@ class Exhibitions(models.Model):
         CLOSE = 0, "Close"
         OPEN = 1, "Open"
         
-    type_of_exebition = models.CharField(_("Тип выставки"), help_text= _("Тип выставки"), max_length=160)# TYPE OF EXHIBITION
+    type_of_exebition = models.CharField(_("Тип выставки"), help_text= _("Тип выставки"), 
+        max_length=160)# TYPE OF EXHIBITION
     date_of_exebition = models.DateTimeField()
     address_of_exebition = models.TextField()
-    add_classes_of_exebition = models.TextField(_("Дополнительные категории"), choices=AddClassesOfEexebition.choices)# THE ADD CLASS
-    status_of_exebition = models.IntegerField(_("Статус выставки"), choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
+    add_classes_of_exebition = models.TextField(_("Дополнительные категории"), 
+        choices=AddClassesOfEexebition.choices)# THE ADD CLASS
+    status_of_exebition = models.IntegerField(_("Статус выставки"), 
+        choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
 
+    def __str__(self) -> str:
+        return self.type_of_exebition, self.date_of_exebition, self.status_of_exebition
 
 class RegistrationExhibition(models.Model):
 
@@ -55,10 +62,9 @@ class RegistrationExhibition(models.Model):
         CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
 
 
-
-    '''данные с сайта с формой регистрации'''
     
-    exebition_venue = models.CharField("Место проведения", max_length=160)# EXHIBITION VENUE
+    exebition_type= models.ForeignKey(Exebitions, verbose_name="Выставка", on_delete=models.CASCADE)
+    exebition_type= models.ForeignKey(Exebitions, verbose_name="Место проведения", on_delete=models.CASCADE)# EXHIBITION VENUE
     breed_race = models.CharField("Порода", max_length=50)# BREED / RACE
     name_of_dog = models.CharField("Кличка", max_length=50)# THE NAME OF THE DOG
     tattoo_number_microchip = models.CharField("Номер чипа", max_length=50)# TATTOO NUMBER / MICROCHIP
@@ -77,25 +83,28 @@ class RegistrationExhibition(models.Model):
     
     # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - FRONT SIDE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    pedigree_of_dog_scanned_front = models.FileField("Паспорт фронт", )
+    pedigree_of_dog_scanned_front = models.ImageField("Паспорт фронт",upload_to="files/download/pedigree_of_dog")
     
     # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - BACK SIDE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    pedigree_of_dog_scanned_back = models.FileField("Паспорт тыл", )
+    pedigree_of_dog_scanned_back = models.ImageField("Паспорт тыл", upload_to="files/download/pedigree_of_dog")
 
     # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    champion_certificate_scanned = models.FileField("Сертификат чемпиона", )
+    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate")
 
     # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    proof_of_peyment_scanned = models.FileField("Оплата сбора", )
+    proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
 
     contact_email = models.EmailField("Email") # Contact e-mail
     # I confirm that I have become acquainted with the processing of personal data in OZKnS and I hereby give my consent.
     # I agree with the processing of personal data under the GDPR Act.
     # Confirm
     
+    def __str__(self) -> str:
+        return self.name_of_owner, self.name_of_dog
+
 
 # class AgreePersonalData(models.Model):
 #     '''данные с сайта с формой регистрации'''
@@ -129,6 +138,9 @@ class RegistrationExhibition(models.Model):
 class Fees(models.Model):
     position = models.TextField()
     price = models.PositiveIntegerField()
+
+    def __str__(self) -> str:
+        return self.position, self.price
     '''данные с сайта позиции с расценками'''
     # For 1 (adult) dog - 40 €
 
