@@ -7,26 +7,24 @@ class AboutUs(models.Model):
     content = models.TextField()
     published = models.DateTimeField(auto_now_add=True, db_index=True)
 
-    def __str__(self) -> str:
-        return self.title, self.content
+    def __str__(self):
+        return "{0} {1}".format(self.title, self.content)
 
 class Exebitions(models.Model):
-    # from registrarion_of_dogs.models import Exebitions
 
     class StatusOfExebition(models.IntegerChoices):
         CLOSE = 0, "Close"
         OPEN = 1, "Open"
         
-    type_exebition = models.CharField(_("Тип выставки"), help_text= _("Тип выставки"), 
-        max_length=160)# TYPE OF EXHIBITION
+    type_exebition = models.TextField(help_text= _("Тип выставки"), max_length=160)# TYPE OF EXHIBITION
     date_of_exebition = models.DateTimeField()
     address_exebition = models.TextField()
-    add_classes_of_exebition = models.TextField(_("Дополнительные категории"))# THE ADD CLASS
+    add_classes_of_exebition = models.ManyToManyField('AdditionalCategories', verbose_name = _("Дополнительные категории" ), blank=True)# THE ADD CLASS
     status_of_exebition = models.IntegerField(_("Статус выставки"), 
         choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
 
-    def __str__(self) -> str:
-        return self.type_of_exebition, self.date_of_exebition, self.status_of_exebition
+    def __str__(self):
+        return self.type_exebition
 
 class AdditionalCategories(models.Model):
         # WORKING = '15', _("WORKING from 12 months - Certificate of examination")
@@ -35,11 +33,34 @@ class AdditionalCategories(models.Model):
         # CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
         pass
 
-class RegistrationExhibition(models.Model):
+class Owner(models.Model):
+
+    owner_name = models.TextField(max_length=50)
+    owner_telephone = models.TextField(max_length=10)
+    owner_email = models.EmailField()
+    status_of_user = models.BooleanField(default=False)
+
+
+class Dog(models.Model):
 
     class GenderDog(models.IntegerChoices):
         MALE = 0, "Male"
         FEMALE = 1, "Female"
+
+    breed_race = models.CharField("Порода", max_length=50)# BREED / RACE
+    gender = models.IntegerField("Пол", choices=GenderDog.choices, default=GenderDog.MALE)# GENDER
+    name_of_dog = models.CharField("Кличка", max_length=50)# THE NAME OF THE DOG
+    tattoo_number_microchip = models.CharField("Номер чипа", max_length=50)# TATTOO NUMBER / MICROCHIP
+    studbook_and_registration = models.CharField("Номер регистрации", max_length=50)# STUDBOOK AND REGISTRATION NUMBE
+    date_of_birth = models.DateField("Дата рождения", )# DATE OF BIRTH
+    father_of_dog = models.CharField("Отец", max_length=50)# THE FATHER OF THE DOG
+    mother_of_dog = models.CharField("мать", max_length=50)# MOTHER DOG
+    breeder_name = models.CharField("Имя заводчика", max_length=50)# BREEDER'S NAME
+    owner_of_name = models.ForeignKey('Owner', related_name="owner_of_name", on_delete=models.PROTECT)# NAME OF OWNER
+
+
+
+class RegistrationExhibition(models.Model):
 
     class ClassOfEexebition(models.TextChoices):
         YOUNGER_PUPPY_UP = '1', _("YOUNGER PUPPY 3-6 months up to 35cm")
@@ -61,7 +82,6 @@ class RegistrationExhibition(models.Model):
         BREEDING_GROUP = '17', _("Final competitions - The most beautiful BREEDING GROUP")
         CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
 
-
     
     type_of_exebition= models.ForeignKey(Exebitions, verbose_name="Выставка", related_name="type_of_exebition", on_delete=models.CASCADE)
     address_of_exebition= models.ForeignKey(Exebitions, verbose_name="Место проведения", related_name="address_of_exebition", on_delete=models.CASCADE)# EXHIBITION VENUE
@@ -69,14 +89,13 @@ class RegistrationExhibition(models.Model):
     name_of_dog = models.CharField("Кличка", max_length=50)# THE NAME OF THE DOG
     tattoo_number_microchip = models.CharField("Номер чипа", max_length=50)# TATTOO NUMBER / MICROCHIP
     studbook_and_registration = models.CharField("Номер регистрации", max_length=50)# STUDBOOK AND REGISTRATION NUMBE
-    date_of_birth = models.DateTimeField("Дата рождения", )# DATE OF BIRTH
+    date_of_birth = models.DateField("Дата рождения", )# DATE OF BIRTH
     father_of_dog = models.CharField("Отец", max_length=50)# THE FATHER OF THE DOG
     mother_of_dog = models.CharField("мать", max_length=50)# MOTHER DOG
     breeder_name = models.CharField("Имя заводчика", max_length=50)# BREEDER'S NAME
-    breeder_address = models.CharField("Адрес заводчика", max_length=50)# BREEDER'S ADDRESS
     name_of_owner = models.CharField("Имя хозяина", max_length=50)# NAME OF OWNER
     owner_address = models.CharField("Адрес хозяина", max_length=50)# OWNER ADDRESS
-    gender = models.IntegerField("Пол", choices=GenderDog.choices, default=GenderDog.MALE)# GENDER
+    # gender = models.IntegerField("Пол", choices=GenderDog.choices, default=GenderDog.MALE)# GENDER
     class_of_exebition = models.TextField("Категория", choices=ClassOfEexebition.choices)# THE CLASS
     
             
@@ -103,13 +122,13 @@ class RegistrationExhibition(models.Model):
     # Confirm
     
     def __str__(self) -> str:
-        return self.name_of_owner, self.name_of_dog
+        return self.name_of_owner + "-" + self.name_of_dog
 
 
 # class AgreePersonalData(models.Model):
 #     '''данные с сайта с формой регистрации'''
 #     # I confirm that I have become acquainted with the processing of personal data in OZKnS and I hereby give my consent.
-#     # I agree with the processing of personal data under the GDPR Act.
+#     # I agree with the processing of personal dadmin/registration_of_dogs/fees/1/change/ata under the GDPR Act.
 #     pass
 
 # class CategoryExebition(models.Model):
@@ -140,7 +159,7 @@ class Fees(models.Model):
     price = models.PositiveIntegerField()
 
     def __str__(self) -> str:
-        return self.position, self.price
+        return self.position
     '''данные с сайта позиции с расценками'''
     # For 1 (adult) dog - 40 €
 
