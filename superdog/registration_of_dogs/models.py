@@ -3,66 +3,80 @@ from django.db import models
 from django.db.models.base import Model
 
 class AboutUs(models.Model):
-    title = models.CharField(max_length=50)
-    content = models.TextField()
-    published = models.DateTimeField(auto_now_add=True, db_index=True)
+    """информация отображаемая на главной странице"""
+    title = models.CharField(_("Приветствие"), max_length=50)
+    content = models.TextField(_("Описание"))
+    published = models.DateTimeField(_("Дата публикации"), auto_now_add=True, db_index=True)
 
     def __str__(self):
         return "{0} {1}".format(self.title, self.content)
 
-class Exebitions(models.Model):
-
+class Exebition(models.Model):
+    """Выставки"""
     class StatusOfExebition(models.IntegerChoices):
+        """Открытые для регистрации или уже закрытые выставки"""
         CLOSE = 0, "Close"
         OPEN = 1, "Open"
         
-    type_exebition = models.TextField(help_text= _("Тип выставки"), max_length=160)# TYPE OF EXHIBITION
-    date_of_exebition = models.DateTimeField()
-    address_exebition = models.TextField()
+    type_exebition = models.TextField(_("Тип выставки"), max_length=160)
+    date_of_exebition = models.DateTimeField(_("Дата и время проведения"))
+    address_exebition = models.TextField(_("Место проведения"))
     add_classes_of_exebition = models.ManyToManyField('AdditionalCategories', verbose_name = _("Дополнительные категории" ), blank=True)# THE ADD CLASS
     status_of_exebition = models.IntegerField(_("Статус выставки"), 
         choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
 
     def __str__(self):
-        return self.type_exebition
+        return return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
 
 class AdditionalCategories(models.Model):
+    """Дополнительные категории выставки"""
         # WORKING = '15', _("WORKING from 12 months - Certificate of examination")
         # PAIR_DOGS = '16', _("Final competitions - The most beautiful PAIR of DOGS")
         # BREEDING_GROUP = '17', _("Final competitions - The most beautiful BREEDING GROUP")
         # CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
         pass
 
-class Owner(models.Model):
+        def __str__(self):
+            pass
 
-    owner_name = models.TextField(max_length=50)
-    owner_telephone = models.TextField(max_length=10)
-    owner_email = models.EmailField()
-    status_of_user = models.BooleanField(default=False)
+class Owner(models.Model):
+    """Владелец"""
+    owner_name = models.TextField(_("Имя владельца"), max_length=50)
+    owner_telephone = models.TextField(_("Телефон владельца"),max_length=10)
+    owner_email = models.EmailField(_("Почта владельца"))
+    status_of_user = models.BooleanField(_("Статус (зарегестрирован/без регистрации"),default=False)
+
+    def __str__(self):
+        return return self.owner_name
 
 
 class Dog(models.Model):
-
+    """Собака"""
     class GenderDog(models.IntegerChoices):
+        """Пол собаки"""
         MALE = 0, "Male"
         FEMALE = 1, "Female"
 
-    breed_race = models.CharField("Порода", max_length=50)# BREED / RACE
-    gender = models.IntegerField("Пол", choices=GenderDog.choices, default=GenderDog.MALE)# GENDER
-    name_of_dog = models.CharField("Кличка", max_length=50)# THE NAME OF THE DOG
-    tattoo_number_microchip = models.CharField("Номер чипа", max_length=50)# TATTOO NUMBER / MICROCHIP
-    studbook_and_registration = models.CharField("Номер регистрации", max_length=50)# STUDBOOK AND REGISTRATION NUMBE
-    date_of_birth = models.DateField("Дата рождения", )# DATE OF BIRTH
-    father_of_dog = models.CharField("Отец", max_length=50)# THE FATHER OF THE DOG
-    mother_of_dog = models.CharField("мать", max_length=50)# MOTHER DOG
-    breeder_name = models.CharField("Имя заводчика", max_length=50)# BREEDER'S NAME
-    owner_of_name = models.ForeignKey('Owner', related_name="owner_of_name", on_delete=models.PROTECT)# NAME OF OWNER
+    breed_race = models.CharField(_("Порода"), max_length=50)# BREED / RACE
+    gender = models.IntegerField(_("Пол"), choices=GenderDog.choices, default=GenderDog.MALE)# GENDER
+    name_of_dog = models.CharField(_("Кличка"), max_length=50)# THE NAME OF THE DOG
+    tattoo_number_microchip = models.CharField(_("Номер чипа"), max_length=50)# TATTOO NUMBER / MICROCHIP
+    studbook_and_registration = models.CharField(_("Номер регистрации"), max_length=50)# STUDBOOK AND REGISTRATION NUMBE
+    date_of_birth = models.DateField(_("Дата рождения"))# DATE OF BIRTH
+    father_of_dog = models.CharField(_("Отец"), max_length=50)# THE FATHER OF THE DOG
+    mother_of_dog = models.CharField(_("Мать"), max_length=50)# MOTHER DOG
+    breeder_name = models.CharField(_("Имя заводчика"), max_length=50)# BREEDER'S NAME
+    owner_of_name = models.ForeignKey(_('Owner'), related_name="owner_of_name", on_delete=models.PROTECT)
+
+    def __str__(self):
+        return return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
 
 
 
 class RegistrationExhibition(models.Model):
-
+    """Регистрация собаки на выставке"""
     class ClassOfEexebition(models.TextChoices):
+        """Категории"""
         YOUNGER_PUPPY_UP = '1', _("YOUNGER PUPPY 3-6 months up to 35cm")
         YOUNGER_PUPPY_OV = '2', _("YOUNGER PUPPY 3-6 months over 35cm")
         PUPPY_UP = '3', _("PUPPY 6-9 months to 35cm")
@@ -83,13 +97,13 @@ class RegistrationExhibition(models.Model):
         CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
 
     
-    type_of_exebition= models.ForeignKey(Exebitions, verbose_name="Выставка", related_name="type_of_exebition", on_delete=models.CASCADE)
-    address_of_exebition= models.ForeignKey(Exebitions, verbose_name="Место проведения", related_name="address_of_exebition", on_delete=models.CASCADE)# EXHIBITION VENUE
-    breed_race = models.CharField("Порода", max_length=50)# BREED / RACE
-    name_of_dog = models.CharField("Кличка", max_length=50)# THE NAME OF THE DOG
-    tattoo_number_microchip = models.CharField("Номер чипа", max_length=50)# TATTOO NUMBER / MICROCHIP
-    studbook_and_registration = models.CharField("Номер регистрации", max_length=50)# STUDBOOK AND REGISTRATION NUMBE
-    date_of_birth = models.DateField("Дата рождения", )# DATE OF BIRTH
+    type_of_exebition= models.ForeignKey(Exebition, verbose_name="Выставка", related_name="type_of_exebition", on_delete=models.CASCADE)
+    address_of_exebition= models.ForeignKey(Exebition, verbose_name="Место проведения", related_name="address_of_exebition", on_delete=models.CASCADE)# EXHIBITION VENUE
+    breed_race = models.CharField(_("Порода"), max_length=50)# BREED / RACE
+    name_of_dog = models.CharField(_("Кличка"), max_length=50)# THE NAME OF THE DOG
+    tattoo_number_microchip = models.CharField(_("Номер чипа"), max_length=50)# TATTOO NUMBER / MICROCHIP
+    studbook_and_registration = models.CharField(_("Номер регистрации"), max_length=50)# STUDBOOK AND REGISTRATION NUMBE
+    date_of_birth = models.DateField(_("Дата рождения"))# DATE OF BIRTH
     father_of_dog = models.CharField("Отец", max_length=50)# THE FATHER OF THE DOG
     mother_of_dog = models.CharField("мать", max_length=50)# MOTHER DOG
     breeder_name = models.CharField("Имя заводчика", max_length=50)# BREEDER'S NAME
