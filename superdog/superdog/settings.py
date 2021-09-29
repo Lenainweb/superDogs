@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'registration_of_dogs.apps.RegistrationOfDogsConfig',
+    'phonenumber_field',
         
 ]
 
@@ -124,33 +125,14 @@ USE_TZ = True
 
 
 LANGUAGES = [
-    ('af', gettext_noop('Afrikaans')),
-    ('ar', gettext_noop('Arabic')),
-    ('ar-dz', gettext_noop('Algerian Arabic')),
-    ('ast', gettext_noop('Asturian')),
-    ('az', gettext_noop('Azerbaijani')),
     ('bg', gettext_noop('Bulgarian')),
     ('be', gettext_noop('Belarusian')),
-    ('bn', gettext_noop('Bengali')),
-    ('br', gettext_noop('Breton')),
-    ('bs', gettext_noop('Bosnian')),
-    ('ca', gettext_noop('Catalan')),
-    ('cs', gettext_noop('Czech')),
-    ('cy', gettext_noop('Welsh')),
-    ('da', gettext_noop('Danish')),
     ('de', gettext_noop('German')),
     ('dsb', gettext_noop('Lower Sorbian')),
     ('el', gettext_noop('Greek')),
     ('en', gettext_noop('English')),
-    ('en-au', gettext_noop('Australian English')),
-    ('en-gb', gettext_noop('British English')),
     ('eo', gettext_noop('Esperanto')),
     ('es', gettext_noop('Spanish')),
-    ('es-ar', gettext_noop('Argentinian Spanish')),
-    ('es-co', gettext_noop('Colombian Spanish')),
-    ('es-mx', gettext_noop('Mexican Spanish')),
-    ('es-ni', gettext_noop('Nicaraguan Spanish')),
-    ('es-ve', gettext_noop('Venezuelan Spanish')),
     ('et', gettext_noop('Estonian')),
     ('eu', gettext_noop('Basque')),
     ('fa', gettext_noop('Persian')),
@@ -161,65 +143,19 @@ LANGUAGES = [
     ('gd', gettext_noop('Scottish Gaelic')),
     ('gl', gettext_noop('Galician')),
     ('he', gettext_noop('Hebrew')),
-    ('hi', gettext_noop('Hindi')),
-    ('hr', gettext_noop('Croatian')),
-    ('hsb', gettext_noop('Upper Sorbian')),
-    ('hu', gettext_noop('Hungarian')),
-    ('hy', gettext_noop('Armenian')),
-    ('ia', gettext_noop('Interlingua')),
-    ('id', gettext_noop('Indonesian')),
-    ('ig', gettext_noop('Igbo')),
-    ('io', gettext_noop('Ido')),
     ('is', gettext_noop('Icelandic')),
     ('it', gettext_noop('Italian')),
-    ('ja', gettext_noop('Japanese')),
     ('ka', gettext_noop('Georgian')),
-    ('kab', gettext_noop('Kabyle')),
-    ('kk', gettext_noop('Kazakh')),
-    ('km', gettext_noop('Khmer')),
-    ('kn', gettext_noop('Kannada')),
-    ('ko', gettext_noop('Korean')),
-    ('ky', gettext_noop('Kyrgyz')),
-    ('lb', gettext_noop('Luxembourgish')),
-    ('lt', gettext_noop('Lithuanian')),
-    ('lv', gettext_noop('Latvian')),
-    ('mk', gettext_noop('Macedonian')),
-    ('ml', gettext_noop('Malayalam')),
-    ('mn', gettext_noop('Mongolian')),
-    ('mr', gettext_noop('Marathi')),
-    ('my', gettext_noop('Burmese')),
-    ('nb', gettext_noop('Norwegian Bokmål')),
-    ('ne', gettext_noop('Nepali')),
-    ('nl', gettext_noop('Dutch')),
-    ('nn', gettext_noop('Norwegian Nynorsk')),
-    ('os', gettext_noop('Ossetic')),
-    ('pa', gettext_noop('Punjabi')),
     ('pl', gettext_noop('Polish')),
-    ('pt', gettext_noop('Portuguese')),
-    ('pt-br', gettext_noop('Brazilian Portuguese')),
     ('ro', gettext_noop('Romanian')),
     ('ru', gettext_noop('Russian')),
     ('sk', gettext_noop('Slovak')),
     ('sl', gettext_noop('Slovenian')),
-    ('sq', gettext_noop('Albanian')),
-    ('sr', gettext_noop('Serbian')),
-    ('sr-latn', gettext_noop('Serbian Latin')),
     ('sv', gettext_noop('Swedish')),
     ('sw', gettext_noop('Swahili')),
-    ('ta', gettext_noop('Tamil')),
-    ('te', gettext_noop('Telugu')),
-    ('tg', gettext_noop('Tajik')),
-    ('th', gettext_noop('Thai')),
-    ('tk', gettext_noop('Turkmen')),
     ('tr', gettext_noop('Turkish')),
-    ('tt', gettext_noop('Tatar')),
-    ('udm', gettext_noop('Udmurt')),
     ('uk', gettext_noop('Ukrainian')),
-    ('ur', gettext_noop('Urdu')),
-    ('uz', gettext_noop('Uzbek')),
-    ('vi', gettext_noop('Vietnamese')),
-    ('zh-hans', gettext_noop('Simplified Chinese')),
-    ('zh-hant', gettext_noop('Traditional Chinese')),
+    
 ]
 
 # Languages using BiDi (right-to-left) layout
@@ -238,3 +174,9 @@ LOCALE_PATHS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Representation can be set by PHONENUMBER_DB_FORMAT variable in django settings module. T
+# his variable must be one of 'E164', 'INTERNATIONAL', 'NATIONAL' or 'RFC3966'. 
+# Recommended is one of the globally meaningful formats 'E164', 'INTERNATIONAL' or 'RFC3966'. '
+# NATIONAL' format require to set up PHONENUMBER_DEFAULT_REGION variable.
+PHONENUMBER_DB_FORMAT = 'E164'

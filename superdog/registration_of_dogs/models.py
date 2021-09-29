@@ -2,8 +2,10 @@ from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models.base import Model
 
+from phonenumber_field.modelfields import PhoneNumberField
+
 class AboutUs(models.Model):
-    """информация отображаемая на главной странице"""
+    """Информация отображаемая на главной странице"""
     title = models.CharField(_("Приветствие"), max_length=50)
     content = models.TextField(_("Описание"))
     published = models.DateTimeField(_("Дата публикации"), auto_now_add=True, db_index=True)
@@ -36,15 +38,18 @@ class AdditionalCategories(models.Model):
         # PAIR_DOGS = '16', _("Final competitions - The most beautiful PAIR of DOGS")
         # BREEDING_GROUP = '17', _("Final competitions - The most beautiful BREEDING GROUP")
         # CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
-    pass
+    category = models.TextField(_("Название категории"),max_length=50)
+    discreption =  models.TextField(_("Описание"),max_length=50)
+
+    
 
     def __str__(self):
-            pass
+            return self.category
 
 class Owner(models.Model):
     """Владелец"""
     owner_name = models.TextField(_("Имя владельца"), max_length=50)
-    owner_telephone = models.TextField(_("Телефон владельца"),max_length=10)
+    owner_telephone = PhoneNumberField(_("Телефон владельца"), blank=True)
     owner_email = models.EmailField(_("Почта владельца"))
     status_of_user = models.BooleanField(_("Статус (зарегестрирован/без регистрации"),default=False)
 
@@ -80,7 +85,7 @@ class Dog(models.Model):
 
     # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate")
+    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate",  blank=True)
 
     # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
@@ -88,7 +93,7 @@ class Dog(models.Model):
 
     
     def __str__(self):
-        return "{0} {1}".format(self.name_of_dog, self.name_of_owner)
+        return "Собака: {0}, хозяин:{1}".format(self.name_of_dog, self.name_of_owner)
 
 
 
@@ -115,52 +120,12 @@ class RegistrationExhibition(models.Model):
         BREEDING_GROUP = '17', _("Final competitions - The most beautiful BREEDING GROUP")
         CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
 
-    
-    type_of_exebition= models.ForeignKey(Exebition, verbose_name="Выставка", related_name="type_of_exebition", on_delete=models.CASCADE)
-    name_of_dog = models.CharField(_("Кличка"), max_length=50)# THE NAME OF THE DOG
-    date_of_birth = models.DateField(_("Дата рождения"))# DATE OF BIRTH
-    name_of_owner = models.CharField("Имя хозяина", max_length=50)# NAME OF OWNER
+    exebition= models.ForeignKey(Exebition, verbose_name=_("Выставка"), related_name="exebition", on_delete=models.PROTECT)
+    dog = models.ForeignKey('Dog', verbose_name=_("Кличка") , related_name="dog", on_delete=models.PROTECT)# THE NAME OF THE DOG
+    owner = models.ForeignKey('Owner', verbose_name=_("Имя хозяина"), related_name="owner", on_delete=models.PROTECT)# NAME OF OWNER
     class_of_exebition = models.TextField("Категория", choices=ClassOfEexebition.choices)# THE CLASS
+    additional_classes = models.ManyToManyField('AdditionalCategories', verbose_name=_("Дополнительные котегории"), blank=True)
     
-            
-    
-     # Contact e-mail
-    # I confirm that I have become acquainted with the processing of personal data in OZKnS and I hereby give my consent.
-    # I agree with the processing of personal data under the GDPR Act.
-    # Confirm
-    
-    # def __str__(self) -> str:
-    #     return self.name_of_owner + "-" + self.name_of_dog
-
-
-# class AgreePersonalData(models.Model):
-#     '''данные с сайта с формой регистрации'''
-#     # I confirm that I have become acquainted with the processing of personal data in OZKnS and I hereby give my consent.
-#     # I agree with the processing of personal dadmin/registration_of_dogs/fees/1/change/ata under the GDPR Act.
-#     pass
-
-# class CategoryExebition(models.Model):
-#     '''данные с сайта с формой регистрации'''
-#     #     YOUNGER PUPPY 3-6 months up to 35cm
-#     #     YOUNGER PUPPY 3-6 months over 35cm
-#     #     PUPPY 6-9 months to 35cm
-#     #     PUPPY 6-9 months over 35cm
-#     #     YOUNG 9-15 months up to 35cm
-#     #     YOUNG 9-18 months over 35cm
-#     #     MEDIUM 15-24 months up to 35cm
-#     #     MEDIUM 15-24 months over 35cm
-#     #     OPEN from 15 months to 35cm
-#     #     OPEN from 18 months over 35cm
-#     #     CHAMPIONS over 18 months up to 35cm - CERTIFICATE
-#     #     CHAMPIONS over 18 months over 35cm - CERTIFICATE
-#     #     VETERANS from 7 years of age up to 35cm
-#     #     VETERANS from 6 years of age over 35 cm
-#     #     WORKING from 12 months - Certificate of examination
-#     #     Final competitions - The most beautiful PAIR of DOGS
-#     #     Final competitions - The most beautiful BREEDING GROUP
-#     #     Final competitions - CHILD AND DOG
-#     pass
-
 
 class Fees(models.Model):
     position = models.TextField()
@@ -169,21 +134,4 @@ class Fees(models.Model):
     def __str__(self):
         return self.position
 
-    '''данные с сайта позиции с расценками'''
-    # For 1 (adult) dog - 40 €
-
-    # Juniors and veterans - 25 €
-    # Younger and older adolescents - 20 €
-    # Registration of the dog on the day of the show - 50 € for each dog, regardless of age
-
-    # Additional competitions:
-
-    # The most beautiful pair of dogs - 20 €
-    # breeding group - 20 €
-    # Child and dog - FREE OF CHARGE!
-    # Registration deadline 10 days before the start of the exhibition
-    # Fill out a separate application for each dog! Attach a photocopy of the dog's pedigree to the application!
-    # Attach a photocopy of the payment of entry fees to the application!
-    # Entry to the caravan park is conditioned by a fee of 3, -Euro / person / car
-    # Accommodation can be provided through www.atcvarin.sk
     

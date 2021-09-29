@@ -1,0 +1,14 @@
+pip freeze > requirements.txt
+
+python manage.py makemigrations
+
+python manage.py migrate registration_of_dogs
+
+python manage.py createsuperuser
+
+python manage.py runserver
+
+git commit -a -m "change db"
+
+source /home/lms/python_projects/django_dogs/env_dog/bin/activate
+

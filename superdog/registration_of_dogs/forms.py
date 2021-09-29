@@ -10,23 +10,12 @@ class RegistrationExhibitionForm(forms.ModelForm):
     # exebition_venue = forms.ModelChoiceField(queryset=Exebition.objects.all(), empty_label=None)
     
     
-    # class Meta:
-    #     model = RegistrationExhibition
-    #     fields = ( 
-    #         'breed_race', 
-    #         'name_of_dog', 
-    #         'tattoo_number_microchip',
-    #         'studbook_and_registration',  
-    #         'father_of_dog', 
-    #         'mother_of_dog', 
-    #         'breeder_name', 
-    #         'name_of_owner', 
-    #         'owner_address', 
-    #         # 'gender', 
-    #         'class_of_exebition',
-    #         'pedigree_of_dog_scanned_front', 
-    #         'pedigree_of_dog_scanned_back', 
-    #         'champion_certificate_scanned', 
-    #         'proof_of_peyment_scanned', 
-    #         'contact_email')
-    pass
+    class Meta:
+        model = RegistrationExhibition
+        fields = ( 
+            'exebition',
+            'dog',
+            'owner',
+            'class_of_exebition',
+            'additional_classes')
+    

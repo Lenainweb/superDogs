@@ -28,7 +28,7 @@ class RegistrationExhibitionView(TemplateView):
         form = RegistrationExhibitionForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('')
+            return redirect('/')
         else:
             pass
         
