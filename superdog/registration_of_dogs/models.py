@@ -26,7 +26,7 @@ class Exebition(models.Model):
         choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
 
     def __str__(self):
-        return return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
+        return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
 
 class AdditionalCategories(models.Model):
     """Дополнительные категории выставки"""
@@ -34,9 +34,9 @@ class AdditionalCategories(models.Model):
         # PAIR_DOGS = '16', _("Final competitions - The most beautiful PAIR of DOGS")
         # BREEDING_GROUP = '17', _("Final competitions - The most beautiful BREEDING GROUP")
         # CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
-        pass
+    pass
 
-        def __str__(self):
+    def __str__(self):
             pass
 
 class Owner(models.Model):
@@ -47,7 +47,7 @@ class Owner(models.Model):
     status_of_user = models.BooleanField(_("Статус (зарегестрирован/без регистрации"),default=False)
 
     def __str__(self):
-        return return self.owner_name
+        return self.owner_name
 
 
 class Dog(models.Model):
@@ -66,10 +66,10 @@ class Dog(models.Model):
     father_of_dog = models.CharField(_("Отец"), max_length=50)# THE FATHER OF THE DOG
     mother_of_dog = models.CharField(_("Мать"), max_length=50)# MOTHER DOG
     breeder_name = models.CharField(_("Имя заводчика"), max_length=50)# BREEDER'S NAME
-    owner_of_name = models.ForeignKey(_('Owner'), related_name="owner_of_name", on_delete=models.PROTECT)
+    name_of_owner = models.ForeignKey('Owner', help_text="Имя владельца", related_name="name_of_owner", on_delete=models.PROTECT)
 
     def __str__(self):
-        return return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
+        return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
 
 
 
