@@ -7,6 +7,7 @@ class AboutUs(models.Model):
     title = models.CharField(_("Приветствие"), max_length=50)
     content = models.TextField(_("Описание"))
     published = models.DateTimeField(_("Дата публикации"), auto_now_add=True, db_index=True)
+    contacts = models.TextField(_("Контакты"))
 
     def __str__(self):
         return "{0} {1}".format(self.title, self.content)
@@ -24,6 +25,7 @@ class Exebition(models.Model):
     add_classes_of_exebition = models.ManyToManyField('AdditionalCategories', verbose_name = _("Дополнительные категории" ), blank=True)# THE ADD CLASS
     status_of_exebition = models.IntegerField(_("Статус выставки"), 
         choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
+    participant_of_exebition = models.ManyToManyField("Dog", verbose_name = _("Участники выставки" ), blank=True)
 
     def __str__(self):
         return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
@@ -68,8 +70,25 @@ class Dog(models.Model):
     breeder_name = models.CharField(_("Имя заводчика"), max_length=50)# BREEDER'S NAME
     name_of_owner = models.ForeignKey('Owner', help_text="Имя владельца", related_name="name_of_owner", on_delete=models.PROTECT)
 
+    # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - FRONT SIDE
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    pedigree_of_dog_scanned_front = models.ImageField("Паспорт фронт",upload_to="files/download/pedigree_of_dog")
+    
+    # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - BACK SIDE
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    pedigree_of_dog_scanned_back = models.ImageField("Паспорт тыл", upload_to="files/download/pedigree_of_dog")
+
+    # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate")
+
+    # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
+
+    
     def __str__(self):
-        return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
+        return "{0} {1}".format(self.name_of_dog, self.name_of_owner)
 
 
 
@@ -98,45 +117,20 @@ class RegistrationExhibition(models.Model):
 
     
     type_of_exebition= models.ForeignKey(Exebition, verbose_name="Выставка", related_name="type_of_exebition", on_delete=models.CASCADE)
-    address_of_exebition= models.ForeignKey(Exebition, verbose_name="Место проведения", related_name="address_of_exebition", on_delete=models.CASCADE)# EXHIBITION VENUE
-    breed_race = models.CharField(_("Порода"), max_length=50)# BREED / RACE
     name_of_dog = models.CharField(_("Кличка"), max_length=50)# THE NAME OF THE DOG
-    tattoo_number_microchip = models.CharField(_("Номер чипа"), max_length=50)# TATTOO NUMBER / MICROCHIP
-    studbook_and_registration = models.CharField(_("Номер регистрации"), max_length=50)# STUDBOOK AND REGISTRATION NUMBE
     date_of_birth = models.DateField(_("Дата рождения"))# DATE OF BIRTH
-    father_of_dog = models.CharField("Отец", max_length=50)# THE FATHER OF THE DOG
-    mother_of_dog = models.CharField("мать", max_length=50)# MOTHER DOG
-    breeder_name = models.CharField("Имя заводчика", max_length=50)# BREEDER'S NAME
     name_of_owner = models.CharField("Имя хозяина", max_length=50)# NAME OF OWNER
-    owner_address = models.CharField("Адрес хозяина", max_length=50)# OWNER ADDRESS
-    # gender = models.IntegerField("Пол", choices=GenderDog.choices, default=GenderDog.MALE)# GENDER
     class_of_exebition = models.TextField("Категория", choices=ClassOfEexebition.choices)# THE CLASS
     
             
     
-    # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - FRONT SIDE
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    pedigree_of_dog_scanned_front = models.ImageField("Паспорт фронт",upload_to="files/download/pedigree_of_dog")
-    
-    # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - BACK SIDE
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    pedigree_of_dog_scanned_back = models.ImageField("Паспорт тыл", upload_to="files/download/pedigree_of_dog")
-
-    # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate")
-
-    # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
-
-    contact_email = models.EmailField("Email") # Contact e-mail
+     # Contact e-mail
     # I confirm that I have become acquainted with the processing of personal data in OZKnS and I hereby give my consent.
     # I agree with the processing of personal data under the GDPR Act.
     # Confirm
     
-    def __str__(self) -> str:
-        return self.name_of_owner + "-" + self.name_of_dog
+    # def __str__(self) -> str:
+    #     return self.name_of_owner + "-" + self.name_of_dog
 
 
 # class AgreePersonalData(models.Model):
@@ -172,8 +166,9 @@ class Fees(models.Model):
     position = models.TextField()
     price = models.PositiveIntegerField()
 
-    def __str__(self) -> str:
+    def __str__(self):
         return self.position
+
     '''данные с сайта позиции с расценками'''
     # For 1 (adult) dog - 40 €
 
