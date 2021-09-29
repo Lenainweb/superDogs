@@ -8,4 +8,4 @@ data
 *.sqlite3
 .vscode
 .docx#
-/registration_of_dogs/migrations
+/files
