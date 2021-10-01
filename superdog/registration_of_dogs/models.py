@@ -41,8 +41,6 @@ class AdditionalCategories(models.Model):
     category = models.TextField(_("Название категории"),max_length=50)
     discreption =  models.TextField(_("Описание"),max_length=50)
 
-    
-
     def __str__(self):
             return self.category
 
@@ -87,11 +85,7 @@ class Dog(models.Model):
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
     champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate",  blank=True)
 
-    # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
-
-    
+        
     def __str__(self):
         return "Собака: {0}, хозяин:{1}".format(self.name_of_dog, self.name_of_owner)
 
@@ -125,7 +119,9 @@ class RegistrationExhibition(models.Model):
     owner = models.ForeignKey('Owner', verbose_name=_("Имя хозяина"), related_name="owner", on_delete=models.PROTECT)# NAME OF OWNER
     class_of_exebition = models.TextField("Категория", choices=ClassOfEexebition.choices)# THE CLASS
     additional_classes = models.ManyToManyField('AdditionalCategories', verbose_name=_("Дополнительные котегории"), blank=True)
-    
+    # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
 
 class Fees(models.Model):
     position = models.TextField()

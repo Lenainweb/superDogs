@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
 from django.utils.translation import ugettext as _
 
-from .models import AboutUs, RegistrationExhibition
+from .models import AboutUs, RegistrationExhibition, Exebition
 from .forms import RegistrationExhibitionForm
 
 class HomePageView(TemplateView):
@@ -20,6 +20,9 @@ class RegistrationExhibitionView(TemplateView):
     
     def get(self, request, **kwargs):
         
+        data_of_exebition = Exebition.objects.filter(status_of_exebition = 1)
+        print([i.type_exebition for i in data_of_exebition])
+
         form = RegistrationExhibitionForm()
         return render (request, 'registration_of_dogs/registration_exhibition.html', context = {'form': form})
         

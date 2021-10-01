@@ -5,17 +5,32 @@ from .models import RegistrationExhibition, Exebition
 
 class RegistrationExhibitionForm(forms.ModelForm):
     
-    date_of_birth = forms.DateField(label=_("Дата рождения"), widget= forms.SelectDateWidget())
-    # exebition_type = forms.ModelChoiceField(queryset=Exebition.objects.all(), empty_label=None)
-    # exebition_venue = forms.ModelChoiceField(queryset=Exebition.objects.all(), empty_label=None)
-    
-    
+        
+    def choices_open_exebition():
+        """функция запрашивает данные об открытых для регистрации 
+        выставках и формирует список вариантов"""
+        data_of_exebition = Exebition.objects.filter(status_of_exebition = 1)
+        value = []
+        count = 0
+        for i in data_of_exebition:
+            
+            value.append((count, "{} - {} - {}".format(i.type_exebition, str(i.date_of_exebition), i.address_exebition)))  
+            count += 1
+        print(value)
+        return value
+
+
+    exebition = forms.ChoiceField(label=_("Выставка"),choices=choices_open_exebition())
+
     class Meta:
-        model = RegistrationExhibition
+        model = Exebition
         fields = ( 
-            'exebition',
-            'dog',
-            'owner',
+            'add_classes_of_exebition', 
+            )
+        model = RegistrationExhibition
+        fields = (
             'class_of_exebition',
-            'additional_classes')
-    
+            )
+
+    date_of_birth = forms.DateField(label=_("Дата рождения"), widget= forms.SelectDateWidget())
+    """остановилась на запросе данных с базы выставок о связанных дополнительных карегориях""" 
