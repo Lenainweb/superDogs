@@ -20,8 +20,8 @@ class RegistrationExhibitionView(TemplateView):
     
     def get(self, request, **kwargs):
         
-        data_of_exebition = Exebition.objects.filter(status_of_exebition = 1)
-        print([i.type_exebition for i in data_of_exebition])
+        # data_of_exebition = Exebition.objects.filter(status_of_exebition = 1)
+        # print([i.type_exebition for i in data_of_exebition])
 
         form = RegistrationExhibitionForm()
         return render (request, 'registration_of_dogs/registration_exhibition.html', context = {'form': form})

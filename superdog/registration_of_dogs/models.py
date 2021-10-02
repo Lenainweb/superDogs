@@ -24,7 +24,9 @@ class Exebition(models.Model):
     type_exebition = models.TextField(_("Тип выставки"), max_length=160)
     date_of_exebition = models.DateTimeField(_("Дата и время проведения"))
     address_exebition = models.TextField(_("Место проведения"))
-    add_classes_of_exebition = models.ManyToManyField('AdditionalCategories', verbose_name = _("Дополнительные категории" ), blank=True)# THE ADD CLASS
+    add_classes_of_exebition = models.ManyToManyField(
+        'AdditionalCategories', verbose_name = _("Дополнительные категории" ), 
+        blank=True, related_name="add_classes_of_exebition")# THE ADD CLASS
     status_of_exebition = models.IntegerField(_("Статус выставки"), 
         choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
     participant_of_exebition = models.ManyToManyField("Dog", verbose_name = _("Участники выставки" ), blank=True)

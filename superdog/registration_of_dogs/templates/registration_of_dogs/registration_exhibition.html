@@ -12,6 +12,14 @@
                 <p>{{form.exebition.label}}<br>
                 {{form.exebition}}</p>
 
+                <script>
+                    // form -> element
+                    let exebition = form.exebition;
+                  
+                    // element -> form
+                    alert(exebition.form); // HTMLFormElement
+                </script>
+
                 
                 <!-- <p>{{form.date_of_exebition.label}}<br>
                 {{form.date_of_exebition}}</p> -->
@@ -27,8 +35,8 @@
                 <p>{{form.class_of_exebition.label}}<br>
                 {{form.class_of_exebition}}</p>
 
-                <!-- <p>{{form.owner_address.label}}<br>
-                {{form.owner_address}}</p> -->
+                <p>{{form.additional_categories.label}}<br>
+                {{form.additional_categories}}</p>
 
                 <!-- <p>{{form.gender.label}}<br>
                 {{form.gender}}</p> -->
