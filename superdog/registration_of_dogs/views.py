@@ -36,7 +36,4 @@ class RegistrationExhibitionView(TemplateView):
             pass
         
 
-    # date = RegistrationExhibition.objects()
-    # print (date.title)
-    # return render(request, 'registration_of_dogs/registration_exhibition.html')#, context = {'title' : date.title, 'content': date.content})
-
+    

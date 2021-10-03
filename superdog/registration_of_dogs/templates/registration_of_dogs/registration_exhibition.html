@@ -6,58 +6,64 @@
         
             <legend>Registration</legend>          
                 {% csrf_token %}
-                <!-- <p>{{form.type_exebition.label}}<br>
-                {{form.type_exebition}}</p> -->
 
                 <p>{{form.exebition.label}}<br>
-                {{form.exebition}}</p>
-
-                <script>
-                    // form -> element
-                    let exebition = form.exebition;
-                  
-                    // element -> form
-                    alert(exebition.form); // HTMLFormElement
-                </script>
-
+                    {{form.exebition}}</p>                 
                 
-                <!-- <p>{{form.date_of_exebition.label}}<br>
-                {{form.date_of_exebition}}</p> -->
-
-                
-                <!-- <p>{{form.address_exebition.label}}<br>
-                {{form.address_exebition}}</p> -->
-
-                
-                <!-- <p>{{form.breeder_name.label}}<br>
-                {{form.breeder_name}}</p> -->
-
                 <p>{{form.class_of_exebition.label}}<br>
-                {{form.class_of_exebition}}</p>
+                    {{form.class_of_exebition}}</p>
 
                 <p>{{form.additional_categories.label}}<br>
-                {{form.additional_categories}}</p>
+                    {{form.additional_categories}}</p>
 
-                <!-- <p>{{form.gender.label}}<br>
-                {{form.gender}}</p> -->
+                <p>{{form.breed_race.label}}<br>
+                    {{form.breed_race}}</p>
+                
+                <p>{{form.gender.label}}<br>
+                    {{form.gender}}</p>
 
-                <p>{{form.add_classes_of_exebition.label}}<br>
-                {{form.add_classes_of_exebition}}</p>
+                <p>{{form.name_of_dog.label}}<br>
+                    {{form.name_of_dog}}</p>
+
+                <p>{{form.tattoo_number_microchip.label}}<br>
+                    {{form.tattoo_number_microchip}}</p>
+
+                <p>{{form.studbook_and_registration.label}}<br>
+                    {{form.studbook_and_registration}}</p>
 
                 <p>{{form.date_of_birth.label}}<br>
-                {{form.date_of_birth}}</p>
+                    {{form.date_of_birth}}</p>
 
-                <!-- <p>{{form.pedigree_of_dog_scanned_back.label}}<br>
-                {{form.pedigree_of_dog_scanned_back}}</p>
+                <p>{{form.father_of_dog.label}}<br>
+                    {{form.father_of_dog}}</p>
+
+                <p>{{form.mother_of_dog.label}}<br>
+                    {{form.mother_of_dog}}</p>
+
+                <p>{{form.breeder_name.label}}<br>
+                    {{form.breeder_name}}</p>
+
+                <p>{{form.owner_name.label}}<br>
+                    {{form.owner_name}}</p>
+
+                <p>{{form.owner_telephone.label}}<br>
+                    {{form.owner_telephone}}</p>
+
+                <p>{{form.owner_email.label}}<br>
+                    {{form.owner_email}}</p>
+
+                <p>{{form.pedigree_of_dog_scanned_front.label}}<br>
+                    {{form.pedigree_of_dog_scanned_front}}</p>
+
+                <p>{{form.pedigree_of_dog_scanned_back.label}}<br>
+                    {{form.pedigree_of_dog_scanned_back}}</p>
 
                 <p>{{form.champion_certificate_scanned.label}}<br>
-                {{form.champion_certificate_scanned}}</p>
+                    {{form.champion_certificate_scanned}}</p>
 
                 <p>{{form.proof_of_peyment_scanned.label}}<br>
-                {{form.proof_of_peyment_scanned}}</p>
+                    {{form.proof_of_peyment_scanned}}</p>
 
-                <p>{{form.contact_email.label}}<br>
-                {{form.contact_email}}</p> -->
 
         <input type="submit" class="btn btn-primary" value="Подать заявку"/>
 

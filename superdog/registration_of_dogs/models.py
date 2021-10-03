@@ -25,7 +25,7 @@ class Exebition(models.Model):
     date_of_exebition = models.DateTimeField(_("Дата и время проведения"))
     address_exebition = models.TextField(_("Место проведения"))
     add_classes_of_exebition = models.ManyToManyField(
-        'AdditionalCategories', verbose_name = _("Дополнительные категории" ), 
+        'AdditionalCategories', verbose_name = _("Дополнительные категории"), 
         blank=True, related_name="add_classes_of_exebition")# THE ADD CLASS
     status_of_exebition = models.IntegerField(_("Статус выставки"), 
         choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
@@ -48,7 +48,7 @@ class AdditionalCategories(models.Model):
 
 class Owner(models.Model):
     """Владелец"""
-    owner_name = models.TextField(_("Имя владельца"), max_length=50)
+    owner_name = models.CharField(_("Имя владельца"), max_length=50)
     owner_telephone = PhoneNumberField(_("Телефон владельца"), blank=True)
     owner_email = models.EmailField(_("Почта владельца"))
     status_of_user = models.BooleanField(_("Статус (зарегестрирован/без регистрации"),default=False)
@@ -85,7 +85,7 @@ class Dog(models.Model):
 
     # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate",  blank=True)
+    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate",  blank=True, null=True)
 
         
     def __str__(self):
