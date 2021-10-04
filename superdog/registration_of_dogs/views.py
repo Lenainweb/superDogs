@@ -9,9 +9,7 @@ class HomePageView(TemplateView):
     
     def get(self, request, **kwargs):
         date = AboutUs.objects.last()
-        # if request.LANGUAGE_CODE == 'ru':
-        #     test = "OK"
-        # else:
+        
         test = request.LANGUAGE_CODE
         return render(request, 'registration_of_dogs/index.html', context = {'title' : date.title, 'content': _(date.content), 'test': test})
 

@@ -31,6 +31,9 @@ class Exebition(models.Model):
         choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
     participant_of_exebition = models.ManyToManyField("Dog", verbose_name = _("Участники выставки" ), blank=True)
 
+    class Meta:
+        ordering = ('-date_of_exebition',)    
+    
     def __str__(self):
         return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
 
