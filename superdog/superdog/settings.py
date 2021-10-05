@@ -180,3 +180,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Recommended is one of the globally meaningful formats 'E164', 'INTERNATIONAL' or 'RFC3966'. '
 # NATIONAL' format require to set up PHONENUMBER_DEFAULT_REGION variable.
 PHONENUMBER_DB_FORMAT = 'E164'
+
+DATETIME_FORMAT = "d M Y H:i:s"

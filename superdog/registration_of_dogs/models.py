@@ -24,11 +24,16 @@ class Exebition(models.Model):
     type_exebition = models.TextField(_("Тип выставки"), max_length=160)
     date_of_exebition = models.DateTimeField(_("Дата и время проведения"))
     address_exebition = models.TextField(_("Место проведения"))
-    add_classes_of_exebition = models.ManyToManyField('AdditionalCategories', verbose_name = _("Дополнительные категории" ), blank=True)# THE ADD CLASS
+    add_classes_of_exebition = models.ManyToManyField(
+        'AdditionalCategories', verbose_name = _("Дополнительные категории"), 
+        blank=True, related_name="add_classes_of_exebition")# THE ADD CLASS
     status_of_exebition = models.IntegerField(_("Статус выставки"), 
         choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
     participant_of_exebition = models.ManyToManyField("Dog", verbose_name = _("Участники выставки" ), blank=True)
 
+    class Meta:
+        ordering = ('-date_of_exebition',)    
+    
     def __str__(self):
         return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
 
@@ -41,14 +46,12 @@ class AdditionalCategories(models.Model):
     category = models.TextField(_("Название категории"),max_length=50)
     discreption =  models.TextField(_("Описание"),max_length=50)
 
-    
-
     def __str__(self):
             return self.category
 
 class Owner(models.Model):
     """Владелец"""
-    owner_name = models.TextField(_("Имя владельца"), max_length=50)
+    owner_name = models.CharField(_("Имя владельца"), max_length=50)
     owner_telephone = PhoneNumberField(_("Телефон владельца"), blank=True)
     owner_email = models.EmailField(_("Почта владельца"))
     status_of_user = models.BooleanField(_("Статус (зарегестрирован/без регистрации"),default=False)
@@ -85,13 +88,9 @@ class Dog(models.Model):
 
     # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate",  blank=True)
+    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate",  blank=True, null=True)
 
-    # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
-    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
-
-    
+        
     def __str__(self):
         return "Собака: {0}, хозяин:{1}".format(self.name_of_dog, self.name_of_owner)
 
@@ -125,7 +124,9 @@ class RegistrationExhibition(models.Model):
     owner = models.ForeignKey('Owner', verbose_name=_("Имя хозяина"), related_name="owner", on_delete=models.PROTECT)# NAME OF OWNER
     class_of_exebition = models.TextField("Категория", choices=ClassOfEexebition.choices)# THE CLASS
     additional_classes = models.ManyToManyField('AdditionalCategories', verbose_name=_("Дополнительные котегории"), blank=True)
-    
+    # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
+    # (file in JPG, PNG, or PDF format - max. Size is 6MB)
+    proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
 
 class Fees(models.Model):
     position = models.TextField()

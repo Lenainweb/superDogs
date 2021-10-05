@@ -73,3 +73,5 @@ class RegistrationExhibitionForm(forms.ModelForm):
         #     'owner_telephone',
         #     'owner_email',
         #     )
+
+
