@@ -100,24 +100,24 @@ class RegistrationExhibition(models.Model):
     """Регистрация собаки на выставке"""
     class ClassOfEexebition(models.TextChoices):
         """Категории"""
-        YOUNGER_PUPPY_UP = '1', _("YOUNGER PUPPY 3-6 months up to 35cm")
-        YOUNGER_PUPPY_OV = '2', _("YOUNGER PUPPY 3-6 months over 35cm")
-        PUPPY_UP = '3', _("PUPPY 6-9 months to 35cm")
-        PUPPY_OV = '4', _("PUPPY 6-9 months over 35cm")
-        YOUNG_YO = '5', _("YOUNG 9-15 months up to 35cm")
-        YOUNG_OV = '6', _("YOUNG 9-18 months over 35cm")
-        MEDIUM_TO = '7', _("MEDIUM 15-24 months up to 35cm")
-        MEDIUM_OV = '8', _("MEDIUM 15-24 months over 35cm")
-        OPEN_TO = '9', _("OPEN from 15 months to 35cm")
-        OPEN_OV = '10', _("OPEN from 18 months over 35cm")
-        CHAMPIONS_TO = '11', _("CHAMPIONS over 18 months up to 35cm - CERTIFICATE")
-        CHAMPIONS_OV = '12', _("CHAMPIONS over 18 months over 35cm - CERTIFICATE")
-        VETERANS_TO = '13', _("VETERANS from 7 years of age up to 35cm")
-        VETERANS_OV = '14', _("VETERANS from 6 years of age over 35 cm")
-        WORKING = '15', _("WORKING from 12 months - Certificate of examination")
-        PAIR_DOGS = '16', _("Final competitions - The most beautiful PAIR of DOGS")
-        BREEDING_GROUP = '17', _("Final competitions - The most beautiful BREEDING GROUP")
-        CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
+        # YOUNGER_PUPPY_UP = '1', _("YOUNGER PUPPY 3-6 months up to 35cm")
+        # YOUNGER_PUPPY_OV = '2', _("YOUNGER PUPPY 3-6 months over 35cm")
+        # PUPPY_UP = '3', _("PUPPY 6-9 months to 35cm")
+        # PUPPY_OV = '4', _("PUPPY 6-9 months over 35cm")
+        # YOUNG_YO = '5', _("YOUNG 9-15 months up to 35cm")
+        # YOUNG_OV = '6', _("YOUNG 9-18 months over 35cm")
+        # MEDIUM_TO = '7', _("MEDIUM 15-24 months up to 35cm")
+        # MEDIUM_OV = '8', _("MEDIUM 15-24 months over 35cm")
+        # OPEN_TO = '9', _("OPEN from 15 months to 35cm")
+        # OPEN_OV = '10', _("OPEN from 18 months over 35cm")
+        # CHAMPIONS_TO = '11', _("CHAMPIONS over 18 months up to 35cm - CERTIFICATE")
+        # CHAMPIONS_OV = '12', _("CHAMPIONS over 18 months over 35cm - CERTIFICATE")
+        # VETERANS_TO = '13', _("VETERANS from 7 years of age up to 35cm")
+        # VETERANS_OV = '14', _("VETERANS from 6 years of age over 35 cm")
+        # WORKING = '15', _("WORKING from 12 months - Certificate of examination")
+        # PAIR_DOGS = '16', _("Final competitions - The most beautiful PAIR of DOGS")
+        # BREEDING_GROUP = '17', _("Final competitions - The most beautiful BREEDING GROUP")
+        # CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
 
         # def give_class_in_form():
         #     return (
@@ -125,32 +125,32 @@ class RegistrationExhibition(models.Model):
         #         MEDIUM_TO, MEDIUM_OV, OPEN_TO, OPEN_OV, CHAMPIONS_TO, CHAMPIONS_OV, VETERANS_TO ,VETERANS_OV, WORKING,
         #         PAIR_DOGS, BREEDING_GROUP,CHILD_AND_DOG
         #         )
-        CATEGORY = (
-            (YOUNGER_PUPPY_UP , _("YOUNGER PUPPY 3-6 months up to 35cm")),
-            (YOUNGER_PUPPY_OV , _("YOUNGER PUPPY 3-6 months over 35cm")),
-            (PUPPY_UP , _("PUPPY 6-9 months to 35cm")),
-            (PUPPY_OV , _("PUPPY 6-9 months over 35cm")),
-            (YOUNG_YO , _("YOUNG 9-15 months up to 35cm")),
-            (YOUNG_OV , _("YOUNG 9-18 months over 35cm")),
-            (MEDIUM_TO , _("MEDIUM 15-24 months up to 35cm")),
-            (MEDIUM_OV , _("MEDIUM 15-24 months over 35cm")),
-            (OPEN_TO , _("OPEN from 15 months to 35cm")),
-            (OPEN_OV, _("OPEN from 18 months over 35cm")),
-            (CHAMPIONS_TO , _("CHAMPIONS over 18 months up to 35cm - CERTIFICATE")),
-            (CHAMPIONS_OV , _("CHAMPIONS over 18 months over 35cm - CERTIFICATE")),
-            (VETERANS_TO , _("VETERANS from 7 years of age up to 35cm")),
-            (VETERANS_OV , _("VETERANS from 6 years of age over 35 cm")),
-            (WORKING , _("WORKING from 12 months - Certificate of examination")),
-            (PAIR_DOGS , _("Final competitions - The most beautiful PAIR of DOGS")),
-            (BREEDING_GROUP , _("Final competitions - The most beautiful BREEDING GROUP")),
-            (CHILD_AND_DOG , _("Final competitions - CHILD AND DOG"))
-            )
+    CATEGORY = [
+        ('YOUNGER_PUPPY_UP' , _("YOUNGER PUPPY 3-6 months up to 35cm")),
+        ('YOUNGER_PUPPY_OV' , _("YOUNGER PUPPY 3-6 months over 35cm")),
+        ('PUPPY_UP' , _("PUPPY 6-9 months to 35cm")),
+        ('PUPPY_OV' , _("PUPPY 6-9 months over 35cm")),
+        ('YOUNG_YO' , _("YOUNG 9-15 months up to 35cm")),
+        ('YOUNG_OV' , _("YOUNG 9-18 months over 35cm")),
+        ('MEDIUM_TO' , _("MEDIUM 15-24 months up to 35cm")),
+        ('MEDIUM_OV' , _("MEDIUM 15-24 months over 35cm")),
+        ('OPEN_TO' , _("OPEN from 15 months to 35cm")),
+        ('OPEN_OV', _("OPEN from 18 months over 35cm")),
+        ('CHAMPIONS_TO' , _("CHAMPIONS over 18 months up to 35cm - CERTIFICATE")),
+        ('CHAMPIONS_OV' , _("CHAMPIONS over 18 months over 35cm - CERTIFICATE")),
+        ('VETERANS_TO' , _("VETERANS from 7 years of age up to 35cm")),
+        ('VETERANS_OV' , _("VETERANS from 6 years of age over 35 cm")),
+        ('WORKING' , _("WORKING from 12 months - Certificate of examination")),
+        ('PAIR_DOGS' , _("Final competitions - The most beautiful PAIR of DOGS")),
+        ('BREEDING_GROUP' , _("Final competitions - The most beautiful BREEDING GROUP")),
+        ('CHILD_AND_DOG' , _("Final competitions - CHILD AND DOG"))
+    ]
 
 
     exebition= models.ForeignKey(Exebition, verbose_name=_("Выставка"), related_name="exebition", on_delete=models.PROTECT)
     dog = models.ForeignKey('Dog', verbose_name=_("Кличка") , related_name="dog", on_delete=models.PROTECT)# THE NAME OF THE DOG
     owner = models.ForeignKey('Owner', verbose_name=_("Имя хозяина"), related_name="owner", on_delete=models.PROTECT)# NAME OF OWNER
-    class_of_exebition = models.TextField("Категория", choices=ClassOfEexebition.choices)# THE CLASS
+    class_of_exebition = models.TextField("Категория", choices=CATEGORY)# THE CLASS
     additional_classes = models.ManyToManyField('AdditionalCategories', verbose_name=_("Дополнительные котегории"), blank=True)
     # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
