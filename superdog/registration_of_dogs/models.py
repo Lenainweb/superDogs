@@ -119,6 +119,34 @@ class RegistrationExhibition(models.Model):
         BREEDING_GROUP = '17', _("Final competitions - The most beautiful BREEDING GROUP")
         CHILD_AND_DOG = '18', _("Final competitions - CHILD AND DOG")
 
+        # def give_class_in_form():
+        #     return (
+        #         YOUNGER_PUPPY_UP, YOUNGER_PUPPY_OV, PUPPY_UP, PUPPY_OV,  YOUNG_YO, YOUNG_OV, 
+        #         MEDIUM_TO, MEDIUM_OV, OPEN_TO, OPEN_OV, CHAMPIONS_TO, CHAMPIONS_OV, VETERANS_TO ,VETERANS_OV, WORKING,
+        #         PAIR_DOGS, BREEDING_GROUP,CHILD_AND_DOG
+        #         )
+        CATEGORY = (
+            (YOUNGER_PUPPY_UP , _("YOUNGER PUPPY 3-6 months up to 35cm")),
+            (YOUNGER_PUPPY_OV , _("YOUNGER PUPPY 3-6 months over 35cm")),
+            (PUPPY_UP , _("PUPPY 6-9 months to 35cm")),
+            (PUPPY_OV , _("PUPPY 6-9 months over 35cm")),
+            (YOUNG_YO , _("YOUNG 9-15 months up to 35cm")),
+            (YOUNG_OV , _("YOUNG 9-18 months over 35cm")),
+            (MEDIUM_TO , _("MEDIUM 15-24 months up to 35cm")),
+            (MEDIUM_OV , _("MEDIUM 15-24 months over 35cm")),
+            (OPEN_TO , _("OPEN from 15 months to 35cm")),
+            (OPEN_OV, _("OPEN from 18 months over 35cm")),
+            (CHAMPIONS_TO , _("CHAMPIONS over 18 months up to 35cm - CERTIFICATE")),
+            (CHAMPIONS_OV , _("CHAMPIONS over 18 months over 35cm - CERTIFICATE")),
+            (VETERANS_TO , _("VETERANS from 7 years of age up to 35cm")),
+            (VETERANS_OV , _("VETERANS from 6 years of age over 35 cm")),
+            (WORKING , _("WORKING from 12 months - Certificate of examination")),
+            (PAIR_DOGS , _("Final competitions - The most beautiful PAIR of DOGS")),
+            (BREEDING_GROUP , _("Final competitions - The most beautiful BREEDING GROUP")),
+            (CHILD_AND_DOG , _("Final competitions - CHILD AND DOG"))
+            )
+
+
     exebition= models.ForeignKey(Exebition, verbose_name=_("Выставка"), related_name="exebition", on_delete=models.PROTECT)
     dog = models.ForeignKey('Dog', verbose_name=_("Кличка") , related_name="dog", on_delete=models.PROTECT)# THE NAME OF THE DOG
     owner = models.ForeignKey('Owner', verbose_name=_("Имя хозяина"), related_name="owner", on_delete=models.PROTECT)# NAME OF OWNER

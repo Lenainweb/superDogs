@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 from django import forms
-from .models import RegistrationExhibition, Exebition, AdditionalCategories, Dog, Owner 
+from .models import RegistrationExhibition, Exebition, AdditionalCategories, Dog, Owner  
 
 
 class RegistrationExhibitionForm(forms.ModelForm):
@@ -44,7 +44,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
     # эксперимент/ вместо функции choices_additional_categories() и вызова ее в поле. Работает аналогично, но пока не форматирует правильно данные
     # additional_categories = forms.MultipleChoiceField(label=_("Дополнительные категории"),choices=choices_additional_categories())
     additional_categories = forms.ModelMultipleChoiceField(queryset=Exebition.objects.filter(status_of_exebition = 1),to_field_name="type_exebition", label=_("Дополнительные категории"))
-    # class_of_exebition = forms.ChoiceField(choices=choices_additional_categories())
+    class_of_exebition = forms.ChoiceField(choices=RegistrationExhibition.ClassOfEexebition.CATEGORY)
 
 
     class Meta:
