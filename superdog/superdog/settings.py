@@ -182,3 +182,28 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 PHONENUMBER_DB_FORMAT = 'E164'
 
 DATETIME_FORMAT = "d M Y H:i:s"
+
+
+# """LOGGING В консоли runserver мы видим все запросы SQL, которые выполняются."""
+# import os
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'root': {
+#         'handlers': ['console'],
+#         'level': 'WARNING',
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'level': 'DEBUG',
+#             'handlers': ['console', ],
+#         },
+#     },
+# }
+

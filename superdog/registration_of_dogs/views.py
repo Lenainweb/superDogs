@@ -21,6 +21,8 @@ class RegistrationExhibitionView(TemplateView):
         # data_of_exebition = Exebition.objects.filter(status_of_exebition = 1)
         # print([i.type_exebition for i in data_of_exebition])
 
+        print(Exebition.objects.filter(status_of_exebition = 1).values_list( "type_exebition", flat=True))
+
         form = RegistrationExhibitionForm()
         return render (request, 'registration_of_dogs/registration_exhibition.html', context = {'form': form})
         
