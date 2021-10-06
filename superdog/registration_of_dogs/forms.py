@@ -43,11 +43,6 @@ class RegistrationExhibitionForm(forms.ModelForm):
                     i.type_exebition, j.category)))
         return additional_categories
 
-    def choices_additional_categories():
-        """возвращает данные о категориях выставки"""
-        class_of_exebition = RegistrationExhibition.objects.all().values('class_of_exebition')
-        print(class_of_exebition)
-
 
     """1. Поле выставки. Изпользует функцию для отображения названия, даты и места в одном поле формы"""
     exebition = forms.ChoiceField(label=_("Выставка"),choices=choices_open_exebition())
@@ -59,13 +54,19 @@ class RegistrationExhibitionForm(forms.ModelForm):
     """Поле даты рождения собаки. Использует простой виджет"""
     date_of_birth = forms.DateField(label=_("Дата рождения"), widget= forms.SelectDateWidget())
 
-    # эксперимент/ вместо функции choices_additional_categories() и вызова ее в поле. 
-    # Работает аналогично, но пока не форматирует правильно данные
+    """3 Поле множественного выбора. Отображает действительные дополнительные категории открытых выставок"""
     # additional_categories = forms.MultipleChoiceField(label=_("Дополнительные категории"),choices=choices_additional_categories())
-    additional_categories = forms.ModelMultipleChoiceField(queryset=Exebition.objects.filter(status_of_exebition = 1).values_list("add_classes_of_exebition__category", flat=True),to_field_name="type_exebition", label=_("Дополнительные категории"))
-    # .exclude("None")
+    additional_categories = forms.ModelMultipleChoiceField(
+        queryset=Exebition.objects.filter(status_of_exebition = 1).values_list(
+            "add_classes_of_exebition__category", flat=True).exclude(add_classes_of_exebition__category=None) ,to_field_name="type_exebition", 
+            label=_("Дополнительные категории"))
+       
     
+    """2. Поле выбора основной категории выставки"""
     class_of_exebition = forms.ChoiceField(label=_("Класс выставки"), choices=RegistrationExhibition.CATEGORY)
+
+    """"""
+    # proof_of_peyment_scanned = forms.I
 
 
     class Meta:
