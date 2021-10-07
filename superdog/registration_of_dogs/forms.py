@@ -2,6 +2,9 @@ from django.utils.translation import gettext_lazy as _
 from django import forms
 from .models import RegistrationExhibition, Exebition, AdditionalCategories, Dog, Owner  
 
+from phonenumber_field.formfields import PhoneNumberField
+
+
 
 class RegistrationExhibitionForm(forms.ModelForm):
     """
@@ -58,42 +61,48 @@ class RegistrationExhibitionForm(forms.ModelForm):
     # additional_categories = forms.MultipleChoiceField(label=_("Дополнительные категории"),choices=choices_additional_categories())
     additional_categories = forms.ModelMultipleChoiceField(
         queryset=Exebition.objects.filter(status_of_exebition = 1).values_list(
-            "add_classes_of_exebition__category", flat=True).exclude(add_classes_of_exebition__category=None) ,to_field_name="type_exebition", 
-            label=_("Дополнительные категории"))
+            "add_classes_of_exebition__category", flat=True).exclude(add_classes_of_exebition__category=None) ,
+            to_field_name="type_exebition", label=_("Дополнительные категории"), blank=True)
        
     
     """2. Поле выбора основной категории выставки"""
     class_of_exebition = forms.ChoiceField(label=_("Класс выставки"), choices=RegistrationExhibition.CATEGORY)
 
+    """19. Поле для загрузки фото- или сканкопии чека об оплате сбора"""
+    proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))
+
+
+    """19. Поле для загрузки фото- или сканкопии чека об оплате сбора"""
+    # proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))
+
+
     """"""
-    # proof_of_peyment_scanned = forms.I
+    # breed_race = forms.CharField(label=_("Порода"))
+    # gender = forms.ChoiceField(label=_("Пол"), choices=Dog.GenderDog.choices)
+
+    """"""
+    owner_name = forms.ChoiceField(label=_("Имя владельца"))
+    owner_telephone = PhoneNumberField(label=_("Телефон владельца"))
+    owner_email = forms.EmailField(label=_("Почта владельца"))
+
+
 
 
     class Meta:
-        model = RegistrationExhibition
+        model = Dog
         fields = (
-            # 'class_of_exebition',
-            'proof_of_peyment_scanned',
+            'breed_race',
+            'gender',
+            'name_of_dog',
+            'tattoo_number_microchip',
+            'studbook_and_registration',
+            'father_of_dog',
+            'mother_of_dog',
+            'breeder_name',
+            'pedigree_of_dog_scanned_front',
+            'pedigree_of_dog_scanned_back',
+            'champion_certificate_scanned',
             )
-        # model = Dog
-        # fields = (
-        #     'breed_race',
-        #     'gender',
-        #     'name_of_dog',
-        #     'tattoo_number_microchip',
-        #     'studbook_and_registration',
-        #     'father_of_dog',
-        #     'mother_of_dog',
-        #     'breeder_name',
-        #     'pedigree_of_dog_scanned_front',
-        #     'pedigree_of_dog_scanned_back',
-        #     'champion_certificate_scanned',
-        #     )
-        # model = Owner
-        # fields = (
-        #     'owner_name',
-        #     'owner_telephone',
-        #     'owner_email',
-        #     )
+        
 
 
