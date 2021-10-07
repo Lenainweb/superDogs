@@ -1,5 +1,8 @@
+from django.core import validators
+from django.forms.widgets import TextInput
 from django.utils.translation import gettext_lazy as _
 from django import forms
+from phonenumbers.phonenumberutil import _VALID_PHONE_NUMBER
 from .models import RegistrationExhibition, Exebition, AdditionalCategories, Dog, Owner  
 
 from phonenumber_field.formfields import PhoneNumberField
@@ -48,7 +51,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
 
 
     """1. Поле выставки. Изпользует функцию для отображения названия, даты и места в одном поле формы"""
-    exebition = forms.ChoiceField(label=_("Выставка"),choices=choices_open_exebition())
+    exebition = forms.ChoiceField(label=_("Выставка"),choices=choices_open_exebition(), error_messages={'required': _("Выставка")})
     
     """1. Может использоваться для отображения поля Выставки. Сейчас показывает только ее название"""
     # exebition = forms.ChoiceField(label=_("Выставка"),choices=Exebition.objects.filter(
@@ -62,7 +65,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
     additional_categories = forms.ModelMultipleChoiceField(
         queryset=Exebition.objects.filter(status_of_exebition = 1).values_list(
             "add_classes_of_exebition__category", flat=True).exclude(add_classes_of_exebition__category=None) ,
-            to_field_name="type_exebition", label=_("Дополнительные категории"), blank=True)
+            to_field_name="type_exebition", label=_("Дополнительные категории"), required=False)
        
     
     """2. Поле выбора основной категории выставки"""
@@ -81,11 +84,24 @@ class RegistrationExhibitionForm(forms.ModelForm):
     # gender = forms.ChoiceField(label=_("Пол"), choices=Dog.GenderDog.choices)
 
     """"""
-    owner_name = forms.ChoiceField(label=_("Имя владельца"))
-    owner_telephone = PhoneNumberField(label=_("Телефон владельца"))
+    owner_name = forms.ChoiceField(label=_("Имя владельца"), widget=TextInput)
+    owner_telephone = PhoneNumberField(label=_("Телефон владельца"), validators=_VALID_PHONE_NUMBER)
     owner_email = forms.EmailField(label=_("Почта владельца"))
 
-
+# {'breed_race': 'Единорог',
+#  'gender': 0, 
+#  'name_of_dog': 'sss', 
+#  'tattoo_number_microchip': '666', 
+#  'studbook_and_registration': '777', 
+#  'father_of_dog': 'конь', 
+#  'mother_of_dog': 'носорог',
+#   'breeder_name': 'Эксперт', 
+#   'champion_certificate_scanned': None, 
+#   'exebition': '6', 
+#   'date_of_birth': datetime.date(2021, 1, 1), 
+#   'additional_categories': <QuerySet []>, 
+#   'class_of_exebition': 'YOUNGER_PUPPY_UP', 
+#   'owner_email': 'lms@lms.com'}
 
 
     class Meta:
