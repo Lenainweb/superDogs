@@ -85,7 +85,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
 
     """"""
     owner_name = forms.ChoiceField(label=_("Имя владельца"), widget=TextInput)
-    owner_telephone = PhoneNumberField(label=_("Телефон владельца"), validators=_VALID_PHONE_NUMBER)
+    owner_telephone = PhoneNumberField(label=_("Телефон владельца"), validators=_VALID_PHONE_NUMBER, required=False)
     owner_email = forms.EmailField(label=_("Почта владельца"))
 
 # {'breed_race': 'Единорог',

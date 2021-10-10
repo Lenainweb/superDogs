@@ -26,6 +26,7 @@ class RegistrationExhibitionView(TemplateView):
         
     def post(self, request, **kwards):    
         form = RegistrationExhibitionForm(request.POST)
+        
         if form.is_valid():
             # cleaned_data
             # form.save()
@@ -34,7 +35,7 @@ class RegistrationExhibitionView(TemplateView):
         else:
 
             print("-------------------------")
-            print(form.cleaned_data)
+            print(form.errors)
             # messages.success(request, f'ygy!')
             return redirect('/')
         
@@ -49,3 +50,12 @@ class RegistrationExhibitionView(TemplateView):
   'pedigree_of_dog_scanned_back': ['en.png'], 'champion_certificate_scanned': [''], 
   'proof_of_peyment_scanned': ['pl.png']}>"""
     
+'''<ul class="errorlist"><
+li>pedigree_of_dog_scanned_front<ul class="errorlist"><li>Обязательное поле.</li></ul>
+</li><li>pedigree_of_dog_scanned_back<ul class="errorlist"><li>Обязательное поле.</li></ul><
+/li><li>additional_categories<ul class="errorlist"><li>Выберите корректный вариант. 
+Дополнительная категория нет среди допустимых значений.</li></ul>
+</li><li>proof_of_peyment_scanned<ul class="errorlist"><li>Обязательное поле.</li></ul><
+/li><li>owner_name<ul class="errorlist"><li>Выберите корректный вариант. Я нет среди допустимых значений.</li></ul>
+</li><li>owner_telephone<ul class="errorlist"><li>Введите корректный номер телефона (например, +12125552368).</li></ul><
+/li></ul>'''
