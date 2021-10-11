@@ -5,7 +5,7 @@ from django.utils.translation import ugettext as _
 from django.contrib import messages
 
 from .models import AboutUs, RegistrationExhibition, Exebition, AdditionalCategories, Dog, Owner
-from .forms import RegistrationExhibitionForm
+from .forms import RegistrationExhibitionForm, DogRegistrationExhibitionForm, OwnerRegistrationExhibitionForm
 
 class HomePageView(TemplateView):
     
@@ -20,24 +20,51 @@ class HomePageView(TemplateView):
 class RegistrationExhibitionView(TemplateView):
     
     def get(self, request, **kwargs):
-        form = RegistrationExhibitionForm()
+        form_registr = RegistrationExhibitionForm()
+        form_dog = DogRegistrationExhibitionForm()
+        form_owner = OwnerRegistrationExhibitionForm()
         return render (request, 'registration_of_dogs/registration_exhibition.html', 
-            context = {'form': form})
+            context = {'form_registr': form_registr, 'form_dog': form_dog, 'form_owner': form_owner })
         
     def post(self, request, **kwards):    
-        form = RegistrationExhibitionForm(request.POST)
+        # form = RegistrationExhibitionForm(request.POST)
+        form_registr = RegistrationExhibitionForm(request.POST, request.FILES)
+        form_dog = DogRegistrationExhibitionForm(request.POST, request.FILES)
+        form_owner = OwnerRegistrationExhibitionForm(request.POST)
         
-        if form.is_valid():
+        if form_registr.is_valid():
             # cleaned_data
             # form.save()
-            print(form.cleaned_data)
-            return redirect('/')
+            print("form_registr:")
+            print(form_registr.cleaned_data)
         else:
+            print("form_registr: errors:")
+            print(form_registr.errors)
+        
+        if form_dog.is_valid():
+            # cleaned_data
+            # form.save()
+            print("form_dog:")
+            print(form_dog.cleaned_data)
+        else:
+            print("form_dog: errors:")
+            print(form_dog.errors)
 
-            print("-------------------------")
-            print(form.errors)
+        if form_owner.is_valid():
+            # cleaned_data
+            # form.save()
+            print("form_owner:")
+            print(form_owner.cleaned_data)
+        else:
+            print("form_owner: errors:")
+            print(form_owner.errors) 
+
+        # else:
+
+        #     print("-------------------------")
+        #     print(form.errors)
             # messages.success(request, f'ygy!')
-            return redirect('/')
+        return redirect('/')
         
 """-------------------------
 <QueryDict: {'csrfmiddlewaretoken': ['goUbIZzBjLBNnpXL6WEXqs6LBKKmgs2ErtyRjKQnXGFFP07Hv4fwYOFer5MMLCQO'],

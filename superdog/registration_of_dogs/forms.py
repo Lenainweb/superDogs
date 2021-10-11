@@ -12,7 +12,7 @@ from phonenumber_field.formfields import PhoneNumberField
 class RegistrationExhibitionForm(forms.ModelForm):
     """
     Форма регистрации собаки на выставки, работает с данными моделей Зарегестрированных, 
-    Выставок, Дополнительных категорий, Собак, Хозяев
+    Выставок, Дополнительных категорий
     """
      
     def choices_open_exebition():
@@ -57,8 +57,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
     # exebition = forms.ChoiceField(label=_("Выставка"),choices=Exebition.objects.filter(
     #     status_of_exebition = 1).values_list( "date_of_exebition", "type_exebition"))
 
-    """Поле даты рождения собаки. Использует простой виджет"""
-    date_of_birth = forms.DateField(label=_("Дата рождения"), widget= forms.SelectDateWidget())
+    
 
     """3 Поле множественного выбора. Отображает действительные дополнительные категории открытых выставок"""
     # additional_categories = forms.MultipleChoiceField(label=_("Дополнительные категории"),choices=choices_additional_categories())
@@ -72,7 +71,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
     class_of_exebition = forms.ChoiceField(label=_("Класс выставки"), choices=RegistrationExhibition.CATEGORY)
 
     """19. Поле для загрузки фото- или сканкопии чека об оплате сбора"""
-    proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))
+    # proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))
 
 
     """19. Поле для загрузки фото- или сканкопии чека об оплате сбора"""
@@ -84,9 +83,9 @@ class RegistrationExhibitionForm(forms.ModelForm):
     # gender = forms.ChoiceField(label=_("Пол"), choices=Dog.GenderDog.choices)
 
     """"""
-    owner_name = forms.ChoiceField(label=_("Имя владельца"), widget=TextInput)
-    owner_telephone = PhoneNumberField(label=_("Телефон владельца"), validators=_VALID_PHONE_NUMBER, required=False)
-    owner_email = forms.EmailField(label=_("Почта владельца"))
+    # owner_name = forms.ChoiceField(label=_("Имя владельца"), widget=TextInput)
+    # owner_telephone = PhoneNumberField(label=_("Телефон владельца"), validators=_VALID_PHONE_NUMBER, required=False)
+    # owner_email = forms.EmailField(label=_("Почта владельца"))
 
 # {'breed_race': 'Единорог',
 #  'gender': 0, 
@@ -102,7 +101,20 @@ class RegistrationExhibitionForm(forms.ModelForm):
 #   'additional_categories': <QuerySet []>, 
 #   'class_of_exebition': 'YOUNGER_PUPPY_UP', 
 #   'owner_email': 'lms@lms.com'}
+    
+    class Meta:
+        model = RegistrationExhibition
+        fields = (
+            'proof_of_peyment_scanned',
+            )
 
+
+       
+class DogRegistrationExhibitionForm(forms.ModelForm):
+
+    """Поле даты рождения собаки. Использует простой виджет"""
+    date_of_birth = forms.DateField(label=_("Дата рождения"), 
+        widget= forms.SelectDateWidget())
 
     class Meta:
         model = Dog
@@ -118,7 +130,14 @@ class RegistrationExhibitionForm(forms.ModelForm):
             'pedigree_of_dog_scanned_front',
             'pedigree_of_dog_scanned_back',
             'champion_certificate_scanned',
-            )
-        
+            ) 
+class OwnerRegistrationExhibitionForm(forms.ModelForm):
 
+    class Meta:
+        model = Owner
+        fields = (
+            'owner_name',
+            'owner_telephone',
+            'owner_email',
+            )
 

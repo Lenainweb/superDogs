@@ -2,68 +2,72 @@
 
 {% block content %}
     <div class="container-fluid" id="form-center">
-    <form method="POST">
+    <!-- <form method="POST"> -->
+    <!-- {% if form.is_multipart %} -->
+        <!-- <form enctype="multipart/form-data" method="post"> -->
+    <!-- {% else %} -->
+        <form method="post">
+    <!-- {% endif %} -->
         
             <legend>Registration</legend>          
                 {% csrf_token %}
 
-                <p>{{form.exebition.label}}<br>
-                    {{form.exebition}}</p>                 
+                <p>{{form_registr.exebition.label}}<br>
+                    {{form_registr.exebition}}</p>                 
                 
-                <p>{{form.class_of_exebition.label}}<br>
-                    {{form.class_of_exebition}}</p>
+                <p>{{form_registr.class_of_exebition.label}}<br>
+                    {{form_registr.class_of_exebition}}</p>
 
-                <p>{{form.additional_categories.label}}<br>
-                    {{form.additional_categories}}</p>
+                <p>{{form_registr.additional_categories.label}}<br>
+                    {{form_registr.additional_categories}}</p>
 
-                <p>{{form.breed_race.label}}<br>
-                    {{form.breed_race}}</p>
+                <p>{{form_dog.breed_race.label}}<br>
+                    {{form_dog.breed_race}}</p>
                 
-                <p>{{form.gender.label}}<br>
-                    {{form.gender}}</p>
+                <p>{{form_dog.gender.label}}<br>
+                    {{form_dog.gender}}</p>
 
-                <p>{{form.name_of_dog.label}}<br>
-                    {{form.name_of_dog}}</p>
+                <p>{{form_dog.name_of_dog.label}}<br>
+                    {{form_dog.name_of_dog}}</p>
 
-                <p>{{form.tattoo_number_microchip.label}}<br>
-                    {{form.tattoo_number_microchip}}</p>
+                <p>{{form_dog.tattoo_number_microchip.label}}<br>
+                    {{form_dog.tattoo_number_microchip}}</p>
 
-                <p>{{form.studbook_and_registration.label}}<br>
-                    {{form.studbook_and_registration}}</p>
+                <p>{{form_dog.studbook_and_registration.label}}<br>
+                    {{form_dog.studbook_and_registration}}</p>
 
-                <p>{{form.date_of_birth.label}}<br>
-                    {{form.date_of_birth}}</p>
+                <p>{{form_dog.date_of_birth.label}}<br>
+                    {{form_dog.date_of_birth}}</p>
 
-                <p>{{form.father_of_dog.label}}<br>
-                    {{form.father_of_dog}}</p>
+                <p>{{form_dog.father_of_dog.label}}<br>
+                    {{form_dog.father_of_dog}}</p>
 
-                <p>{{form.mother_of_dog.label}}<br>
-                    {{form.mother_of_dog}}</p>
+                <p>{{form_dog.mother_of_dog.label}}<br>
+                    {{form_dog.mother_of_dog}}</p>
 
-                <p>{{form.breeder_name.label}}<br>
-                    {{form.breeder_name}}</p>
+                <p>{{form_dog.breeder_name.label}}<br>
+                    {{form_dog.breeder_name}}</p>
 
-                <p>{{form.owner_name.label}}<br>
-                    {{form.owner_name}}
-                    {{form.owner_name.errorlist}}</p>
+                <p>{{form_owner.owner_name.label}}<br>
+                    {{form_owner.owner_name}}</p>
 
-                <p>{{form.owner_telephone.label}}<br>
-                    {{form.owner_telephone}}</p>
+                <p>{{form_owner.owner_telephone.label}}<br>
+                    {{form_owner.owner_telephone}}</p>
 
-                <p>{{form.owner_email.label}}<br>
-                    {{form.owner_email}}</p>
+                <p>{{form_owner.owner_email.label}}<br>
+                    {{form_owner.owner_email}}</p>
 
-                <p>{{form.pedigree_of_dog_scanned_front.label}}<br>
-                    {{form.pedigree_of_dog_scanned_front}}</p>
+                <p>{{form_dog.pedigree_of_dog_scanned_front.label}}<br>
+                    {{form_dog.pedigree_of_dog_scanned_front}}</p>
 
-                <p>{{form.pedigree_of_dog_scanned_back.label}}<br>
-                    {{form.pedigree_of_dog_scanned_back}}</p>
+                <p>{{form_dog.pedigree_of_dog_scanned_back.label}}<br>
+                    {{form_dog.pedigree_of_dog_scanned_back}}</p>
 
-                <p>{{form.champion_certificate_scanned.label}}<br>
-                    {{form.champion_certificate_scanned}}</p>
+                <p>{{form_dog.champion_certificate_scanned.label}}<br>
+                    {{form_dog.champion_certificate_scanned}}</p>
 
-                <p>{{form.proof_of_peyment_scanned.label}}<br>
-                    {{form.proof_of_peyment_scanned}}</p>
+                <p>{{form_registr.proof_of_peyment_scanned.label}}<br>
+                    {{form_registr.proof_of_peyment_scanned}}</p>
 
 
         <input type="submit" class="btn btn-primary" value="Подать заявку"/>
