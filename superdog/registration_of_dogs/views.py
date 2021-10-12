@@ -24,17 +24,23 @@ class RegistrationExhibitionView(TemplateView):
         form_dog = DogRegistrationExhibitionForm()
         form_owner = OwnerRegistrationExhibitionForm()
         return render (request, 'registration_of_dogs/registration_exhibition.html', 
-            context = {'form_registr': form_registr, 'form_dog': form_dog, 'form_owner': form_owner })
+            context = {'form_registr': form_registr, 
+                'form_dog': form_dog, 
+                'form_owner': form_owner })
         
     def post(self, request, **kwards):    
-        # form = RegistrationExhibitionForm(request.POST)
         form_registr = RegistrationExhibitionForm(request.POST, request.FILES)
         form_dog = DogRegistrationExhibitionForm(request.POST, request.FILES)
         form_owner = OwnerRegistrationExhibitionForm(request.POST)
         
+        if form_owner.is_valid():
+            print("form_owner:")
+            print(form_owner.cleaned_data)
+        else:
+            print("form_owner: errors:")
+            print(form_owner.errors)
+
         if form_registr.is_valid():
-            # cleaned_data
-            # form.save()
             print("form_registr:")
             print(form_registr.cleaned_data)
         else:
@@ -42,28 +48,12 @@ class RegistrationExhibitionView(TemplateView):
             print(form_registr.errors)
         
         if form_dog.is_valid():
-            # cleaned_data
-            # form.save()
             print("form_dog:")
             print(form_dog.cleaned_data)
         else:
             print("form_dog: errors:")
             print(form_dog.errors)
 
-        if form_owner.is_valid():
-            # cleaned_data
-            # form.save()
-            print("form_owner:")
-            print(form_owner.cleaned_data)
-        else:
-            print("form_owner: errors:")
-            print(form_owner.errors) 
-
-        # else:
-
-        #     print("-------------------------")
-        #     print(form.errors)
-            # messages.success(request, f'ygy!')
         return redirect('/')
         
 """-------------------------

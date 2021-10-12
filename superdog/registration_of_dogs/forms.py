@@ -8,7 +8,6 @@ from .models import RegistrationExhibition, Exebition, AdditionalCategories, Dog
 from phonenumber_field.formfields import PhoneNumberField
 
 
-
 class RegistrationExhibitionForm(forms.ModelForm):
     """
     Форма регистрации собаки на выставки, работает с данными моделей Зарегестрированных, 
@@ -39,12 +38,8 @@ class RegistrationExhibitionForm(forms.ModelForm):
         additional_categories = []
 
         for i in data_of_exebition:
-            # print("______________")
-            # print(i.add_classes_of_exebition.all())
             data = i.add_classes_of_exebition.all()
             for j in data:
-                # print(j)
-                # additional_categories.append((str(j.id), j.category))
                 additional_categories.append((str(j.id), "{} : - {}".format(
                     i.type_exebition, j.category)))
         return additional_categories
@@ -63,7 +58,9 @@ class RegistrationExhibitionForm(forms.ModelForm):
     # additional_categories = forms.MultipleChoiceField(label=_("Дополнительные категории"),choices=choices_additional_categories())
     additional_categories = forms.ModelMultipleChoiceField(
         queryset=Exebition.objects.filter(status_of_exebition = 1).exclude(add_classes_of_exebition__category=None) ,
-            to_field_name="type_exebition", label=_("Дополнительные категории"), required=False) #.values_list("add_classes_of_exebition__id", "add_classes_of_exebition__category")
+            to_field_name="type_exebition", label=_("Дополнительные категории"), required=False) 
+    '''если вставить после фильтр, создаст список для каждой категории айди-название: 
+    .values_list("add_classes_of_exebition__id", "add_classes_of_exebition__category")'''
        
     
     """2. Поле выбора основной категории выставки"""
@@ -71,41 +68,19 @@ class RegistrationExhibitionForm(forms.ModelForm):
 
     """19. Поле для загрузки фото- или сканкопии чека об оплате сбора"""
     # proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))
-
-
     """19. Поле для загрузки фото- или сканкопии чека об оплате сбора"""
-    # proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))
-
-
-    """"""
+    # proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))"
     # breed_race = forms.CharField(label=_("Порода"))
     # gender = forms.ChoiceField(label=_("Пол"), choices=Dog.GenderDog.choices)
-
-    """"""
     # owner_name = forms.ChoiceField(label=_("Имя владельца"), widget=TextInput)
     # owner_telephone = PhoneNumberField(label=_("Телефон владельца"), validators=_VALID_PHONE_NUMBER, required=False)
     # owner_email = forms.EmailField(label=_("Почта владельца"))
 
-# {'breed_race': 'Единорог',
-#  'gender': 0, 
-#  'name_of_dog': 'sss', 
-#  'tattoo_number_microchip': '666', 
-#  'studbook_and_registration': '777', 
-#  'father_of_dog': 'конь', 
-#  'mother_of_dog': 'носорог',
-#   'breeder_name': 'Эксперт', 
-#   'champion_certificate_scanned': None, 
-#   'exebition': '6', 
-#   'date_of_birth': datetime.date(2021, 1, 1), 
-#   'additional_categories': <QuerySet []>, 
-#   'class_of_exebition': 'YOUNGER_PUPPY_UP', 
-#   'owner_email': 'lms@lms.com'}
     
     class Meta:
         model = RegistrationExhibition
         fields = (
             'proof_of_peyment_scanned',)
-
 
        
 class DogRegistrationExhibitionForm(forms.ModelForm):
@@ -129,6 +104,7 @@ class DogRegistrationExhibitionForm(forms.ModelForm):
             'pedigree_of_dog_scanned_back',
             'champion_certificate_scanned',
             ) 
+
 class OwnerRegistrationExhibitionForm(forms.ModelForm):
 
     class Meta:
