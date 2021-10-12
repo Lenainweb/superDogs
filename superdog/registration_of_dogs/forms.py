@@ -62,9 +62,8 @@ class RegistrationExhibitionForm(forms.ModelForm):
     """3 Поле множественного выбора. Отображает действительные дополнительные категории открытых выставок"""
     # additional_categories = forms.MultipleChoiceField(label=_("Дополнительные категории"),choices=choices_additional_categories())
     additional_categories = forms.ModelMultipleChoiceField(
-        queryset=Exebition.objects.filter(status_of_exebition = 1).values_list(
-            "add_classes_of_exebition__category", flat=True).exclude(add_classes_of_exebition__category=None) ,
-            to_field_name="type_exebition", label=_("Дополнительные категории"), required=False)
+        queryset=Exebition.objects.filter(status_of_exebition = 1).exclude(add_classes_of_exebition__category=None) ,
+            to_field_name="type_exebition", label=_("Дополнительные категории"), required=False) #.values_list("add_classes_of_exebition__id", "add_classes_of_exebition__category")
        
     
     """2. Поле выбора основной категории выставки"""
@@ -105,8 +104,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
     class Meta:
         model = RegistrationExhibition
         fields = (
-            'proof_of_peyment_scanned',
-            )
+            'proof_of_peyment_scanned',)
 
 
        
