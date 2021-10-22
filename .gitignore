@@ -9,3 +9,4 @@ data
 .vscode
 .docx#
 files/
+*.code-workspace

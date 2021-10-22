@@ -2,7 +2,7 @@ from django.core import validators
 from django.forms.widgets import TextInput
 from django.utils.translation import gettext_lazy as _
 from django import forms
-from phonenumbers.phonenumberutil import _VALID_PHONE_NUMBER
+# from phonenumbers.phonenumberutil import _VALID_PHONE_NUMBER
 from .models import RegistrationExhibition, Exebition, AdditionalCategories, Dog, Owner  
 
 from phonenumber_field.formfields import PhoneNumberField

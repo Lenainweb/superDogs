@@ -37,6 +37,8 @@ class RegistrationExhibitionView(TemplateView):
             # form.save()
             print("form_registr:")
             print(form_registr.cleaned_data)
+            messages.info(request, 'Your form_registr successfully!')
+
         else:
             print("form_registr: errors:")
             print(form_registr.errors)
