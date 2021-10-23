@@ -40,8 +40,9 @@ class RegistrationExhibitionForm(forms.ModelForm):
         for i in data_of_exebition:
             data = i.add_classes_of_exebition.all()
             for j in data:
-                additional_categories.append((str(j.id), "{} : - {}".format(
+                additional_categories.append((j.id, "{} : - {}".format(
                     i.type_exebition, j.category)))
+        print(additional_categories)
         return additional_categories
 
 
@@ -55,10 +56,23 @@ class RegistrationExhibitionForm(forms.ModelForm):
     
 
     """3 Поле множественного выбора. Отображает действительные дополнительные категории открытых выставок"""
-    # additional_categories = forms.MultipleChoiceField(label=_("Дополнительные категории"),choices=choices_additional_categories())
-    additional_categories = forms.ModelMultipleChoiceField(
-        queryset=Exebition.objects.filter(status_of_exebition = 1).exclude(add_classes_of_exebition__category=None) ,
-            to_field_name="type_exebition", label=_("Дополнительные категории"), required=False) 
+    # additional_categories = forms.MultipleChoiceField(
+    #   label=_("Дополнительные категории"),choices=choices_additional_categories())
+#  Работает, но значение не валидируется   
+    # additional_categories = forms.ModelMultipleChoiceField(
+    #     queryset=Exebition.objects.filter(
+    #         status_of_exebition = 1).exclude(
+    #             add_classes_of_exebition__category=None).values_list(
+    #                 "add_classes_of_exebition__id", "add_classes_of_exebition__category"),
+    #         to_field_name="type_exebition", label=_("Дополнительные категории"), required=False) 
+    
+    # additional_categories = forms.ModelMultipleChoiceField(
+    #     queryset=Exebition.objects.filter(
+    #         status_of_exebition = 1).exclude(
+    #             add_classes_of_exebition__category=None).values(
+    #                 "add_classes_of_exebition__id").values("add_classes_of_exebition__category"),
+    #         to_field_name="type_exebition", label=_("Дополнительные категории"), required=False)
+
     '''если вставить после фильтр, создаст список для каждой категории айди-название: 
     .values_list("add_classes_of_exebition__id", "add_classes_of_exebition__category")'''
        
@@ -68,7 +82,6 @@ class RegistrationExhibitionForm(forms.ModelForm):
 
     """19. Поле для загрузки фото- или сканкопии чека об оплате сбора"""
     # proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))
-    """19. Поле для загрузки фото- или сканкопии чека об оплате сбора"""
     # proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))"
     # breed_race = forms.CharField(label=_("Порода"))
     # gender = forms.ChoiceField(label=_("Пол"), choices=Dog.GenderDog.choices)
@@ -80,6 +93,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
     class Meta:
         model = RegistrationExhibition
         fields = (
+            'additional_classes',
             'proof_of_peyment_scanned',)
 
        

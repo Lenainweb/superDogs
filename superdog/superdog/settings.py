@@ -184,8 +184,8 @@ PHONENUMBER_DB_FORMAT = 'E164'
 DATETIME_FORMAT = "d M Y H:i:s"
 
 
-# """LOGGING В консоли runserver мы видим все запросы SQL, которые выполняются."""
-# import os
+"""LOGGING В консоли runserver мы видим все запросы SQL, которые выполняются."""
+import os
 
 # LOGGING = {
 #     'version': 1,
