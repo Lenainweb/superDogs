@@ -2,7 +2,6 @@ from django.core import validators
 from django.forms.widgets import TextInput
 from django.utils.translation import gettext_lazy as _
 from django import forms
-# from phonenumbers.phonenumberutil import _VALID_PHONE_NUMBER
 from .models import RegistrationExhibition, Exebition, AdditionalCategories, Dog, Owner  
 
 from phonenumber_field.formfields import PhoneNumberField
@@ -10,8 +9,7 @@ from phonenumber_field.formfields import PhoneNumberField
 
 class RegistrationExhibitionForm(forms.ModelForm):
     """
-    Форма регистрации собаки на выставки, работает с данными моделей Зарегестрированных, 
-    Выставок, Дополнительных категорий
+    Форма регистрации на выставку
     """
      
     def choices_open_exebition():
@@ -78,26 +76,20 @@ class RegistrationExhibitionForm(forms.ModelForm):
        
     
     """2. Поле выбора основной категории выставки"""
-    class_of_exebition = forms.ChoiceField(label=_("Класс выставки"), choices=RegistrationExhibition.CATEGORY)
-
-    """19. Поле для загрузки фото- или сканкопии чека об оплате сбора"""
-    # proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))
-    # proof_of_peyment_scanned = forms.ImageField(label=_("Чек об оплате сбора"))"
-    # breed_race = forms.CharField(label=_("Порода"))
-    # gender = forms.ChoiceField(label=_("Пол"), choices=Dog.GenderDog.choices)
-    # owner_name = forms.ChoiceField(label=_("Имя владельца"), widget=TextInput)
-    # owner_telephone = PhoneNumberField(label=_("Телефон владельца"), validators=_VALID_PHONE_NUMBER, required=False)
-    # owner_email = forms.EmailField(label=_("Почта владельца"))
-
+    # class_of_exebition = forms.ChoiceField(label=_("Класс выставки"), choices=RegistrationExhibition.CATEGORY)
     
     class Meta:
         model = RegistrationExhibition
         fields = (
+            'class_of_exebition',
             'additional_classes',
             'proof_of_peyment_scanned',)
 
        
 class DogRegistrationExhibitionForm(forms.ModelForm):
+    """
+    Форма регистрации собаки 
+    """
 
     """Поле даты рождения собаки. Использует простой виджет"""
     date_of_birth = forms.DateField(label=_("Дата рождения"), 
@@ -120,7 +112,9 @@ class DogRegistrationExhibitionForm(forms.ModelForm):
             ) 
 
 class OwnerRegistrationExhibitionForm(forms.ModelForm):
-
+    """
+    Форма регистрации хозяина
+    """
     class Meta:
         model = Owner
         fields = (
