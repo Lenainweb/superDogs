@@ -22,7 +22,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
         data_of_exebition = Exebition.objects.filter(status_of_exebition = 1)
         open_exebition = []
         for i in data_of_exebition:                
-            open_exebition.append((str(i.id), "{} - {} - {}".format(
+            open_exebition.append((i.id, "{} - {} - {}".format(
                 i.type_exebition, str(i.date_of_exebition.strftime('%d-%m-%Y %H:%M')), i.address_exebition))) 
         return open_exebition
 

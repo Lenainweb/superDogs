@@ -51,9 +51,21 @@ class RegistrationExhibitionView(TemplateView):
             dog.save()
             dog_id = dog.id
 
-            # register = form_registr
+            register = form_registr.save(commit=False)
+            # exebition = Exebition.objects.filter(exebition = form_registr.cleaned_data["exebition"])
+            # print(exebition)
+
+            print("form_registr://n", form_registr.cleaned_data)
+            register.exebition = Exebition.objects.get(id=int(form_registr.cleaned_data["exebition"]))
+            register.dog = dog
+            register.owner = owner
+            register.additional_categories = form_registr.cleaned_data["additional_categories"]
+            register.class_of_exebition = form_registr.cleaned_data["class_of_exebition"]
+
+
             # register.dog_id = dog_id #Dog.objects.filter(dog=dog) 
-            # register.save()
+            register.save()
+            # register.save_m2m()
 
 
 
