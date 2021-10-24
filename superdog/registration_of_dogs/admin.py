@@ -4,8 +4,8 @@ from .models import AboutUs, Exebition, AdditionalCategories, Owner, Dog, Regist
 
 # admin.site.register(AboutUs)
 # admin.site.register(Exebition)
-admin.site.register(AdditionalCategories)
-admin.site.register(Owner)
+# admin.site.register(AdditionalCategories)
+# admin.site.register(Owner)
 admin.site.register(Dog)
 admin.site.register(RegistrationExhibition)
 admin.site.register(Fees)
@@ -19,8 +19,17 @@ class AboutUsAdmin(ModelAdmin):
 class ExebitionAdmin(ModelAdmin):
     list_display = ('type_exebition', 'date_of_exebition', 'status_of_exebition', 'display_classes_of_exebition')
 
-    
+class AdditionalCategoriesAdmin(ModelAdmin):
+    list_display = ('category', 'discreption')
+
+
+class OwnerAdmin(ModelAdmin):
+    list_display = ('owner_name', 'owner_telephone', 'owner_email', 'display_dogs', 'status_of_user')
 
 admin.site.register(AboutUs, AboutUsAdmin)
 admin.site.register(Exebition, ExebitionAdmin)
+admin.site.register(AdditionalCategories, AdditionalCategoriesAdmin)
+admin.site.register(Owner, OwnerAdmin)
+
+
 

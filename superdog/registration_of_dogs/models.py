@@ -66,7 +66,16 @@ class Owner(models.Model):
     owner_name = models.CharField(_("Имя владельца"), max_length=50)
     owner_telephone = PhoneNumberField(_("Телефон владельца"), blank=True)
     owner_email = models.EmailField(_("Почта владельца"))
-    status_of_user = models.BooleanField(_("Статус (зарегестрирован/без регистрации"),default=False)
+    status_of_user = models.BooleanField(_("Статус (зарегестрирован/без регистрации)"),default=False)
+
+    def display_dogs(self):
+        """
+        Формирует список собак для отображения в админке на странице хозяев.
+        """
+        return ', '.join([dog.name_of_dog for dog in self.name_of_owner.all()[:3] ])
+    display_dogs.short_description = _('Собаки')
+
+
 
     def __str__(self):
         return self.owner_name
@@ -101,6 +110,9 @@ class Dog(models.Model):
     # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
     champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate",  blank=True, null=True)
+
+
+    
 
         
     def __str__(self):
