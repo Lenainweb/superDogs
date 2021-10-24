@@ -111,9 +111,6 @@ class Dog(models.Model):
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
     champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate",  blank=True, null=True)
 
-
-    
-
         
     def __str__(self):
         return "Собака: {0}, хозяин:{1}".format(self.name_of_dog, self.name_of_owner)
@@ -179,6 +176,8 @@ class RegistrationExhibition(models.Model):
     # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
     proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
+    date_registration = models.DateTimeField(_("Дата регистрации"), auto_now_add=True, db_index=True)
+
 
     def __str__(self):
         return "Выставка: {0}, собачка: {1}".format(self.exebition, self.dog)

@@ -30,7 +30,7 @@ class DogAdmin(ModelAdmin):
     list_display = ('breed_race', 'name_of_owner', 'name_of_dog', 'date_of_birth')
 
 class RegistrationExhibitionAdmin(ModelAdmin):
-    list_display = ('exebition', 'dog', 'class_of_exebition')
+    list_display = ('exebition', 'dog', 'class_of_exebition', 'date_registration')
 
 class FeesAdmin(ModelAdmin):
     list_display = ('position', 'price')
