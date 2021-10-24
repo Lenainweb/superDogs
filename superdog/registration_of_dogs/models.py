@@ -12,14 +12,19 @@ class AboutUs(models.Model):
     contacts = models.TextField(_("Контакты"))
 
     def __str__(self):
-        return "{0} {1}".format(self.title, self.content)
+        return "{0} {1}".format(self.title, self.published)
 
 class Exebition(models.Model):
     """Выставки"""
-    class StatusOfExebition(models.IntegerChoices):
-        """Открытые для регистрации или уже закрытые выставки"""
-        CLOSE = 0, "Close"
-        OPEN = 1, "Open"
+    # class StatusOfExebition(models.IntegerChoices):
+        # """Открытые для регистрации или уже закрытые выставки"""
+        # CLOSE = 0, "Close"
+        # OPEN = 1, "Open"
+
+    STATUS = [
+        (0, "Close"),
+        (1, "Open")
+    ]
         
     type_exebition = models.TextField(_("Тип выставки"), max_length=160)
     date_of_exebition = models.DateTimeField(_("Дата и время проведения"))
@@ -28,11 +33,18 @@ class Exebition(models.Model):
         'AdditionalCategories', verbose_name = _("Дополнительные категории"), 
         blank=True, related_name="add_classes_of_exebition")# THE ADD CLASS
     status_of_exebition = models.IntegerField(_("Статус выставки"), 
-        choices=StatusOfExebition.choices, default=StatusOfExebition.OPEN)
+        choices=STATUS, default=STATUS[1])
     participant_of_exebition = models.ManyToManyField("Dog", verbose_name = _("Участники выставки" ), blank=True)
 
     class Meta:
-        ordering = ('-date_of_exebition',)    
+        ordering = ('-date_of_exebition',)
+
+    def display_classes_of_exebition(self):
+        """
+        Формирует список дополнительных категорий для отображения в админке.
+        """
+        return ', '.join([add_classes_of_exebition.category for add_classes_of_exebition in self.add_classes_of_exebition.all()[:3] ])
+    display_classes_of_exebition.short_description = _('Дополнительные карегории')
     
     def __str__(self):
         return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
@@ -98,8 +110,8 @@ class Dog(models.Model):
 
 class RegistrationExhibition(models.Model):
     """Регистрация собаки на выставке"""
-    class ClassOfEexebition(models.TextChoices):
-        """Категории"""
+    # class ClassOfEexebition(models.TextChoices):
+    #     """Категории"""
         # YOUNGER_PUPPY_UP = '1', _("YOUNGER PUPPY 3-6 months up to 35cm")
         # YOUNGER_PUPPY_OV = '2', _("YOUNGER PUPPY 3-6 months over 35cm")
         # PUPPY_UP = '3', _("PUPPY 6-9 months to 35cm")
@@ -141,9 +153,9 @@ class RegistrationExhibition(models.Model):
         ('VETERANS_TO' , _("VETERANS from 7 years of age up to 35cm")),
         ('VETERANS_OV' , _("VETERANS from 6 years of age over 35 cm")),
         ('WORKING' , _("WORKING from 12 months - Certificate of examination")),
-        ('PAIR_DOGS' , _("Final competitions - The most beautiful PAIR of DOGS")),
-        ('BREEDING_GROUP' , _("Final competitions - The most beautiful BREEDING GROUP")),
-        ('CHILD_AND_DOG' , _("Final competitions - CHILD AND DOG"))
+        # ('PAIR_DOGS' , _("Final competitions - The most beautiful PAIR of DOGS")),
+        # ('BREEDING_GROUP' , _("Final competitions - The most beautiful BREEDING GROUP")),
+        # ('CHILD_AND_DOG' , _("Final competitions - CHILD AND DOG"))
     ]
 
 
@@ -155,6 +167,9 @@ class RegistrationExhibition(models.Model):
     # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
     proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
+
+    def __str__(self):
+        return "Выставка: {0}, собачка: {1}".format(self.exebition, self.dog)
 
 class Fees(models.Model):
     position = models.TextField()
