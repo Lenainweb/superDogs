@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.db.models.base import Model
@@ -51,6 +52,11 @@ class Exebition(models.Model):
         """
         return ', '.join([add_classes_of_exebition.category for add_classes_of_exebition in self.add_classes_of_exebition.all()[:3] ])
     display_classes_of_exebition.short_description = _('Дополнительные карегории')
+
+    
+    def get_absolute_url(self):
+        return reverse("show_detail", kwargs={"slug": self.id})
+
     
     def __str__(self):
         return "{0} {1}".format(self.type_exebition, self.date_of_exebition)

@@ -1,3 +1,4 @@
+from django.db import models
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView, ListView
 from django.utils.translation import ugettext as _
@@ -69,5 +70,10 @@ class RegistrationExhibitionView(TemplateView):
 
 
 class ShowsList(ListView):
-    pass
+    """"""
+    model = Exebition
+    context_object_name = 'shows_list'
+    # queryset = Exebition.objects.all()
+    template_name = "registration_of_dogs/shows_list.html"
+    
         

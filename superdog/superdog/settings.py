@@ -170,11 +170,10 @@ LANGUAGES_BIDI = ["he", "ar", "ar-dz", "fa", "ur"]
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    'djando_dogs/static',
-]
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = [STATIC_DIR]
+
 
 LOCALE_PATHS = [
     BASE_DIR / 'registration_of_dogs/locale/',]

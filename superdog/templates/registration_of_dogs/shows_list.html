@@ -1,0 +1,16 @@
+{% extends 'registration_of_dogs/layout.html' %}
+{% load i18n %}
+
+
+{% block content %}
+<h1> GHSDTN </h1>
+    {% for show in shows_list %}
+
+        <p>{{ show.type_exebition}}</p>
+        <p>{{ show.date_of_exebition}}</p>
+        <p>{{ show.address_exebition}}</p>
+        <p>{{ show.status_of_exebition}}</p>
+    
+    {% endfor %}
+
+{% endblock %}
