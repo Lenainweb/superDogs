@@ -63,6 +63,7 @@ class RegistrationExhibitionView(TemplateView):
         else:
             # сообщение с указанием ошибок при заполнении формы
             messages.error(request, form_owner.errors, form_registr.errors, form_dog.errors)
+            print("FALSE")
 
         return redirect('/')
         

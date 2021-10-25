@@ -1,3 +1,4 @@
+from datetime import date
 from django.core import validators
 from django.forms.widgets import TextInput
 from django.utils.translation import gettext_lazy as _
@@ -93,7 +94,7 @@ class DogRegistrationExhibitionForm(forms.ModelForm):
 
     """Поле даты рождения собаки. Использует простой виджет"""
     date_of_birth = forms.DateField(label=_("Дата рождения"), 
-        widget= forms.SelectDateWidget())
+        widget= forms.SelectDateWidget(years=range(date.today().year, date.today().year - 20, -1)))
 
     class Meta:
         model = Dog
