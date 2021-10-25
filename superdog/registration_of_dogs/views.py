@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.utils.translation import ugettext as _
 
 from django.contrib import messages
@@ -66,4 +66,8 @@ class RegistrationExhibitionView(TemplateView):
             print("FALSE")
 
         return redirect('/')
+
+
+class ShowsList(ListView):
+    pass
         

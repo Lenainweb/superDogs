@@ -14,6 +14,11 @@ class AboutUs(models.Model):
     def __str__(self):
         return "{0} {1}".format(self.title, self.published)
 
+    class Meta:
+        verbose_name = _("Описание")
+        verbose_name_plural = _("О нас")
+
+
 class Exebition(models.Model):
     """Выставки"""
     # class StatusOfExebition(models.IntegerChoices):
@@ -35,6 +40,7 @@ class Exebition(models.Model):
     status_of_exebition = models.IntegerField(_("Статус выставки"), 
         choices=STATUS, default=STATUS[1])
     participant_of_exebition = models.ManyToManyField("Dog", verbose_name = _("Участники выставки" ), blank=True)
+    # url = models.SlugField(max_length=160, unique=True)
 
     class Meta:
         ordering = ('-date_of_exebition',)
@@ -49,6 +55,10 @@ class Exebition(models.Model):
     def __str__(self):
         return "{0} {1}".format(self.type_exebition, self.date_of_exebition)
 
+    class Meta:
+        verbose_name = _("Выставка")
+        verbose_name_plural = _("Выставки")
+
 class AdditionalCategories(models.Model):
     """Дополнительные категории выставки"""
         # WORKING = '15', _("WORKING from 12 months - Certificate of examination")
@@ -60,6 +70,10 @@ class AdditionalCategories(models.Model):
 
     def __str__(self):
             return self.category
+
+    class Meta:
+        verbose_name = _("Дополнительные категории")
+        verbose_name_plural = _("Дополнительные категории")
 
 class Owner(models.Model):
     """Владелец"""
@@ -76,9 +90,13 @@ class Owner(models.Model):
     display_dogs.short_description = _('Собаки')
 
 
-
     def __str__(self):
         return self.owner_name
+
+    
+    class Meta:
+        verbose_name = _("Владелец")
+        verbose_name_plural = _("Владельцы")
 
 
 class Dog(models.Model):
@@ -101,19 +119,23 @@ class Dog(models.Model):
 
     # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - FRONT SIDE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    pedigree_of_dog_scanned_front = models.ImageField("Паспорт фронт",upload_to="files/download/pedigree_of_dog")
+    pedigree_of_dog_scanned_front = models.ImageField("Паспорт фронт",upload_to="media/download/pedigree_of_dog")
     
     # SCANNED (PHOTOGRAPHED) PEDIGREE OF THE DOG - BACK SIDE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    pedigree_of_dog_scanned_back = models.ImageField("Паспорт тыл", upload_to="files/download/pedigree_of_dog")
+    pedigree_of_dog_scanned_back = models.ImageField("Паспорт тыл", upload_to="media/download/pedigree_of_dog")
 
     # SCANNED (PHOTOGRAPHED) CHAMPION CERTIFICATE
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="files/download/champion_certificate",  blank=True, null=True)
+    champion_certificate_scanned = models.ImageField("Сертификат чемпиона", upload_to="media/download/champion_certificate",  blank=True, null=True)
 
         
     def __str__(self):
         return "Собака: {0}, хозяин:{1}".format(self.name_of_dog, self.name_of_owner)
+
+    class Meta:
+        verbose_name = _("Собаку")
+        verbose_name_plural = _("Собаки")
 
 
 
@@ -175,12 +197,16 @@ class RegistrationExhibition(models.Model):
     additional_classes = models.ManyToManyField('AdditionalCategories', verbose_name=_("Дополнительные котегории"), blank=True)
     # SCANNED (PHOTOGRAPHED) PROOF OF PAYMENT
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
-    proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="files/download/proof_of_peyment")
+    proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="media/download/proof_of_peyment")
     date_registration = models.DateTimeField(_("Дата регистрации"), auto_now_add=True, db_index=True)
 
 
     def __str__(self):
         return "Выставка: {0}, собачка: {1}".format(self.exebition, self.dog)
+
+    class Meta:
+        verbose_name = _("Регистрация")
+        verbose_name_plural = _("Регистрации")
 
 class Fees(models.Model):
     position = models.TextField()
@@ -188,5 +214,9 @@ class Fees(models.Model):
 
     def __str__(self):
         return self.position
+
+    class Meta:
+        verbose_name = _("Сбор")
+        verbose_name_plural = _("Сборы")
 
     

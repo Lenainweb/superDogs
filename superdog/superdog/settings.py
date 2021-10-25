@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # This is defined here as a do-nothing function because we can't import
@@ -60,10 +61,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'superdog.urls'
 
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -167,6 +170,12 @@ LANGUAGES_BIDI = ["he", "ar", "ar-dz", "fa", "ur"]
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    'djando_dogs/static',
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 LOCALE_PATHS = [
     BASE_DIR / 'registration_of_dogs/locale/',]
 
@@ -183,9 +192,14 @@ PHONENUMBER_DB_FORMAT = 'E164'
 
 DATETIME_FORMAT = "d M Y H:i:s"
 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
 
 """LOGGING В консоли runserver мы видим все запросы SQL, которые выполняются."""
-import os
+# import os
 
 # LOGGING = {
 #     'version': 1,
