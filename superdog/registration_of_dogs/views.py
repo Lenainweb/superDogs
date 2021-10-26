@@ -70,17 +70,14 @@ class RegistrationExhibitionView(TemplateView):
 
 
 class ShowsList(ListView):
-    """"""
+    """Список всех выставок"""
     model = Exebition
     context_object_name = 'shows_list'
     # queryset = Exebition.objects.all()
     template_name = "registration_of_dogs/shows_list.html"
 
 class ShowDetail(DetailView):
-    """"""
-    
-    # def get(self, request, pk):
-    
+    """Страница выставки"""
     model = Exebition
     slug_field = "id"
     context_object_name = 'shows_detail'

@@ -18,7 +18,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
         функция запрашивает данные об открытых для регистрации 
         выставках и формирует список вариантов
         """
-        data_of_exebition = Exebition.objects.filter(status_of_exebition = 1)
+        data_of_exebition = Exebition.objects.filter(status_of_exebition=True)
         open_exebition = []
         for i in data_of_exebition:                
             open_exebition.append((i.id, "{} - {} - {}".format(

@@ -18,6 +18,7 @@ class AboutUs(models.Model):
     class Meta:
         verbose_name = _("Описание")
         verbose_name_plural = _("О нас")
+        ordering = ('published',)
 
 
 class Exebition(models.Model):
@@ -27,10 +28,10 @@ class Exebition(models.Model):
         # CLOSE = 0, "Close"
         # OPEN = 1, "Open"
 
-    STATUS = [
-        (0, "Close"),
-        (1, "Open")
-    ]
+    # STATUS = [
+    #     (0, "Close"),
+    #     (1, "Open")
+    # ]
         
     type_exebition = models.TextField(_("Тип выставки"), max_length=160)
     date_of_exebition = models.DateTimeField(_("Дата и время проведения"))
@@ -38,8 +39,7 @@ class Exebition(models.Model):
     add_classes_of_exebition = models.ManyToManyField(
         'AdditionalCategories', verbose_name = _("Дополнительные категории"), 
         blank=True, related_name="add_classes_of_exebition")# THE ADD CLASS
-    status_of_exebition = models.IntegerField(_("Статус выставки"), 
-        choices=STATUS, default=STATUS[1])
+    status_of_exebition = models.BooleanField(_("Статус выставки"),  default=True)
     participant_of_exebition = models.ManyToManyField("Dog", verbose_name = _("Участники выставки" ), blank=True)
     # url = models.SlugField(max_length=160, unique=True)
 
@@ -205,6 +205,7 @@ class RegistrationExhibition(models.Model):
     # (file in JPG, PNG, or PDF format - max. Size is 6MB)
     proof_of_peyment_scanned = models.ImageField("Оплата сбора",upload_to="media/download/proof_of_peyment")
     date_registration = models.DateTimeField(_("Дата регистрации"), auto_now_add=True, db_index=True)
+    proof_of_payment = models.BooleanField(_("Проверка оплаты администратором"), default=False)
 
 
     def __str__(self):
