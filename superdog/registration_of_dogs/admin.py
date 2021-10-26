@@ -1,9 +1,14 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
+from django.contrib.admin import AdminSite
 from django.db import models
 from django.db.models import fields
 from .models import AboutUs, Exebition, AdditionalCategories, Owner, Dog, RegistrationExhibition, Fees 
 
+
+admin.site.site_header = 'Amber dog administration'
+admin.site.site_title = 'ADministration'
+admin.site.index_title= 'Site Administration'
 
 @admin.register(AboutUs) 
 class AboutUsAdmin(ModelAdmin):
