@@ -11,6 +11,7 @@ admin.site.site_header = 'Amber dog administration'
 admin.site.site_title = 'ADministration'
 admin.site.index_title= 'Site Administration'
 
+
 @admin.register(AboutUs) 
 class AboutUsAdmin(ModelAdmin):
     list_display = ('title', 'published', 'content', 'contacts')
@@ -24,7 +25,6 @@ class ParticipantInline(admin.TabularInline):
     readonly_fields = ('dog', 'owner', 'proof_of_peyment_scanned',)
     
 
-
 @admin.register(Exebition)
 class ExebitionAdmin(ModelAdmin):
     list_display = ('type_exebition', 'date_of_exebition', 'status_of_exebition', 'display_classes_of_exebition')
@@ -35,7 +35,6 @@ class ExebitionAdmin(ModelAdmin):
     filter_horizontal = ('add_classes_of_exebition',)
     # filter_vertical = ('add_classes_of_exebition',)
     save_on_top = True
-
     fieldsets = (
         (None, {
             "fields": (("type_exebition", "status_of_exebition"),)
@@ -50,10 +49,10 @@ class ExebitionAdmin(ModelAdmin):
         )
 
 
-
 @admin.register(AdditionalCategories)
 class AdditionalCategoriesAdmin(ModelAdmin):
     list_display = ('category', 'discreption')
+
 
 @admin.register(Owner)
 class OwnerAdmin(ModelAdmin):
@@ -77,7 +76,6 @@ class RegistrationExhibitionAdmin(ModelAdmin):
     # radio_fields = {'class_of_exebition': admin.VERTICAL}
 
     
-
 @admin.register(Fees)
 class FeesAdmin(ModelAdmin):
     list_display = ('position', 'price')
