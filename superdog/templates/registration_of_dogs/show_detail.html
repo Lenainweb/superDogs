@@ -1,0 +1,16 @@
+{% extends 'registration_of_dogs/layout.html' %}
+{% load i18n %}
+
+
+{% block content %}
+<h1>show_detail</h1>
+    <!-- {% for detail in show_detail %} -->
+
+        <p>{{ show_detail.type_exebition}}</p>
+        <p>{{ show_detail.date_of_exebition}}</p>
+        <p>{{ show_detail.address_exebition}}</p>
+        <p>{{ show_detail.status_of_exebition}}</p>
+    
+    <!-- {% endfor %} -->
+
+{% endblock %}
