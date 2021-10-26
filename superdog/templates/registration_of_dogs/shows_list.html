@@ -6,7 +6,7 @@
 <h1> GHSDTN </h1>
     {% for show in shows_list %}
 
-        <p>{{ show.type_exebition}}</p>
+        <a href="{{ show.get_absolute_url }}">{{ show.type_exebition}} </a>
         <p>{{ show.date_of_exebition}}</p>
         <p>{{ show.address_exebition}}</p>
         <p>{{ show.status_of_exebition}}</p>

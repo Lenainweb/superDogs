@@ -1,6 +1,6 @@
 from django.db import models
 from django.shortcuts import redirect, render
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from django.utils.translation import ugettext as _
 
 from django.contrib import messages
@@ -75,5 +75,16 @@ class ShowsList(ListView):
     context_object_name = 'shows_list'
     # queryset = Exebition.objects.all()
     template_name = "registration_of_dogs/shows_list.html"
+
+class ShowDetail(DetailView):
+    """"""
+    
+    # def get(self, request, pk):
+    
+    model = Exebition
+    slug_field = "id"
+    context_object_name = 'shows_detail'
+    template_name = "registration_of_dogs/show_detail.html"
+
     
         
