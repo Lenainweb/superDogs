@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
 from django.contrib.admin import AdminSite
+from django.contrib.admin.sites import site
 from django.db import models
 from django.db.models import fields
 from .models import AboutUs, Exebition, AdditionalCategories, Owner, Dog, RegistrationExhibition, Fees 
@@ -29,10 +30,24 @@ class ExebitionAdmin(ModelAdmin):
     list_display = ('type_exebition', 'date_of_exebition', 'status_of_exebition', 'display_classes_of_exebition')
     list_filter = ('status_of_exebition',)
     list_editable = ('status_of_exebition',)
-    fields = ('type_exebition', 'date_of_exebition', 'add_classes_of_exebition', 'status_of_exebition',)
+    # fields = ('type_exebition', 'date_of_exebition', 'add_classes_of_exebition', 'status_of_exebition',)
     inlines = [ParticipantInline]
-    # filter_horizontal = ('add_classes_of_exebition',)
-    filter_vertical = ('add_classes_of_exebition',)
+    filter_horizontal = ('add_classes_of_exebition',)
+    # filter_vertical = ('add_classes_of_exebition',)
+    save_on_top = True
+
+    fieldsets = (
+        (None, {
+            "fields": (("type_exebition", "status_of_exebition"),)
+        }),
+        (None, {
+            "fields": (("date_of_exebition", "address_exebition"),)
+        }),
+        ("Дополнительные категории", {
+            "classes": ("collapse",),
+            "fields": ("add_classes_of_exebition",)
+        }),
+        )
 
 
 
