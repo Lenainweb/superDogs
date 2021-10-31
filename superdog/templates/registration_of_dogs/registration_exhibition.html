@@ -2,12 +2,8 @@
 
 {% block content %}
     <div class="container-fluid" id="form-center">
-    <!-- <form method="POST"> -->
-    <!-- {% if form.is_multipart %} -->
-        <!-- <form enctype="multipart/form-data" method="post"> -->
-    <!-- {% else %} -->
+        
         <form method="post" enctype="multipart/form-data">
-    <!-- {% endif %} -->
         
             <legend>Registration</legend>          
                 {% csrf_token %}
