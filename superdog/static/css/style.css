@@ -1,9 +1,17 @@
-body
+.cont
 {
-    background-image: url("../img/dog.jpg");
+    background-image: url("../img/dog-with-whitecover.jpg");
     background-color: #fcf8f8;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: contain;
     background-position: center;
+    padding-top: 10vh;
+    padding-bottom: 50vh;
+
+
+}
+
+.shows_list
+{
+    padding-left: 1%;
 }

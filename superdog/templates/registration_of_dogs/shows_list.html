@@ -3,14 +3,31 @@
 
 
 {% block content %}
-<h1> GHSDTN </h1>
+
+<div class="conteiner shows_list">
+
+    <div>
+        <h1 class="display-6">Выставки</h1>
+    </div>
+
+<div class="row">
     {% for show in shows_list %}
 
-        <a href="{{ show.get_absolute_url }}">{{ show.type_exebition}} </a>
-        <p>{{ show.date_of_exebition}}</p>
-        <p>{{ show.address_exebition}}</p>
-        <p>{{ show.status_of_exebition}}</p>
+        <div class="col-sm-6">
+            <div class="card border-primary mb-3" style="max-width: 30rem;">
+                <div class="card-header"><a href="{{ show.get_absolute_url }}">{{ show.type_exebition}} </a></div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ show.date_of_exebition}}</h4>
+                        <p class="card-text"> {{ show.address_exebition}}</p>
+                        <p class="card-text">{{ show.status_of_exebition}}</p>
+                    </div>
+            </div>
+        </div>
     
     {% endfor %}
+</div>
+</div>
 
 {% endblock %}
+
+

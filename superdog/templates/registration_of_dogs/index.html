@@ -1,29 +1,13 @@
 {% extends 'registration_of_dogs/base.html' %}
 {% load i18n %}
 
-<!-- <div class="header">
-  {% include 'include/header.html' %}
-</div> -->
-
-
 {% block content %}
-<div class="cont">
-<div>
-    <!-- Гугл переводчик -->
-    <div id="google_translate_element"><div class="skiptranslate goog-te-gadget" dir="ltr" style=""><div id=":0.targetLanguage" class="goog-te-gadget-simple" style="white-space: nowrap;"><img src="https://www.google.com/images/cleardot.gif" class="goog-te-gadget-icon" alt="" style="background-image: url(&quot;https://translate.googleapis.com/translate_static/img/te_ctrl3.gif&quot;); background-position: -65px 0px;"><span style="vertical-align: middle;"><a aria-haspopup="true" class="goog-te-menu-value" href="javascript:void(0)"><span>Select Language</span><img src="https://www.google.com/images/cleardot.gif" alt="" width="1" height="1"><span style="border-left: 1px solid rgb(187, 187, 187);">​</span><img src="https://www.google.com/images/cleardot.gif" alt="" width="1" height="1"><span aria-hidden="true" style="color: rgb(155, 155, 155);">▼</span></a></span></div></div></div><script type="text/javascript">
-        function googleTranslateElementInit() {
-          new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ar,ru,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');
-        }
-        </script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-      
-</div>
-  <!-- slider_area_start -->
-  <link href="static/css/style.css" rel="stylesheet">
-  <div class="slider_area">
+
+
       <div class=" d-flex align-items-center">
           <div class="container">
               <div class="row">
-                  <div class="col-lg-4 col-md-4">
+                  <div class="col-sm-12 col-lg-6 col-md-6">
                       <div >
                           <h3> <span>{{title}}</span></h3>
                           <p>{%translate content%}</p>
@@ -37,11 +21,6 @@
               <img src="static/img/dog.jpg" alt="Фото автора Cup of Couple: Pexels">
           </div> -->
       </div>
-  </div>
-</div>
-
-
-</div>
 
 
 {% endblock %}
