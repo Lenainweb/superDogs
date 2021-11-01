@@ -46,7 +46,7 @@ class RegistrationExhibitionForm(forms.ModelForm):
 
 
     """1. Поле выставки. Изпользует функцию для отображения названия, даты и места в одном поле формы"""
-    exebition = forms.ChoiceField(label=_("Выставка"),choices=choices_open_exebition(), error_messages={'required': _("Выставка")})
+    exebition = forms.ChoiceField(label=_("Выставка"), choices=choices_open_exebition(), error_messages={'required': _("Выставка")})
     
     """1. Может использоваться для отображения поля Выставки. Сейчас показывает только ее название"""
     # exebition = forms.ChoiceField(label=_("Выставка"),choices=Exebition.objects.filter(

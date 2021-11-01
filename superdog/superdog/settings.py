@@ -45,8 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'registration_of_dogs.apps.RegistrationOfDogsConfig',
     'phonenumber_field',
+    'crispy_forms',
         
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

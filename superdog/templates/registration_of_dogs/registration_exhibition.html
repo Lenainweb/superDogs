@@ -1,77 +1,86 @@
 {% extends 'registration_of_dogs/base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
     <div class="container-fluid" >
-        <div class="form-group ">
-        
+               
                 
-            <form method="post" enctype="multipart/form-data">
+            <form class="registration" method="post" enctype="multipart/form-data">
             
                 <legend>Registration</legend>          
                     {% csrf_token %}      
                     
-                    <p>{{form_registr.exebition.label}}<br>
-                        {{form_registr.exebition}}</p>                 
-                    
-                    <p>{{form_registr.class_of_exebition.label}}<br>
-                        {{form_registr.class_of_exebition}}</p>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 mb-0 bordc">
+                                {{form_registr.exebition|as_crispy_field}} 
+                            </div>                
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_registr.class_of_exebition|as_crispy_field}}
+                            </div>
 
-                    <p>{{form_registr.additional_classes.label}}<br>
-                        {{form_registr.additional_classes}}</p>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_registr.additional_classes|as_crispy_field}}
+                            </div>
+                        </div>
 
-                    <p>{{form_dog.breed_race.label}}<br>
-                        {{form_dog.breed_race}}</p>
-                    
-                    <p>{{form_dog.gender.label}}<br>
-                        {{form_dog.gender}}</p>
-
-                    <p>{{form_dog.name_of_dog.label}}<br>
-                        {{form_dog.name_of_dog}}</p>
-
-                    <p>{{form_dog.tattoo_number_microchip.label}}<br>
-                        {{form_dog.tattoo_number_microchip}}</p>
-
-                    <p>{{form_dog.studbook_and_registration.label}}<br>
-                        {{form_dog.studbook_and_registration}}</p>
-
-                    <p>{{form_dog.date_of_birth.label}}<br>
-                        {{form_dog.date_of_birth}}</p>
-
-                    <p>{{form_dog.father_of_dog.label}}<br>
-                        {{form_dog.father_of_dog}}</p>
-
-                    <p>{{form_dog.mother_of_dog.label}}<br>
-                        {{form_dog.mother_of_dog}}</p>
-
-                    <p>{{form_dog.breeder_name.label}}<br>
-                        {{form_dog.breeder_name}}</p>
-
-                    <p>{{form_owner.owner_name.label}}<br>
-                        {{form_owner.owner_name}}</p>
-
-                    <p>{{form_owner.owner_telephone.label}}<br>
-                        {{form_owner.owner_telephone}}</p>
-
-                    <p>{{form_owner.owner_email.label}}<br>
-                        {{form_owner.owner_email}}</p>
-
-                    <p>{{form_dog.pedigree_of_dog_scanned_front.label}}<br>
-                        {{form_dog.pedigree_of_dog_scanned_front}}</p>
-
-                    <p>{{form_dog.pedigree_of_dog_scanned_back.label}}<br>
-                        {{form_dog.pedigree_of_dog_scanned_back}}</p>
-
-                    <p>{{form_dog.champion_certificate_scanned.label}}<br>
-                        {{form_dog.champion_certificate_scanned}}</p>
-
-                    <p>{{form_registr.proof_of_peyment_scanned.label}}<br>
-                        {{form_registr.proof_of_peyment_scanned}}</p>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.breed_race|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.gender|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.name_of_dog|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.tattoo_number_microchip|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.studbook_and_registration|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.date_of_birth|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.father_of_dog|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.mother_of_dog|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.breeder_name|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_owner.owner_name|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_owner.owner_telephone|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_owner.owner_email|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.pedigree_of_dog_scanned_front|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.pedigree_of_dog_scanned_back|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_dog.champion_certificate_scanned|as_crispy_field}}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{form_registr.proof_of_peyment_scanned|as_crispy_field}}
+                            </div>
 
 
                 <input type="submit" class="btn btn-primary" value="Подать заявку"/>
 
             </form>
-        </div>
+        
     </div>
 
 
