@@ -5,10 +5,13 @@
 {% block content %}
     <div class="container-fluid" >
                
+        <div class="detail">
+            <h1>Registration</h1>
+        </div> 
                 
             <form class="registration" method="post" enctype="multipart/form-data">
             
-                <legend>Registration</legend>          
+                        
                     {% csrf_token %}      
                     
                         <div class="form-row">

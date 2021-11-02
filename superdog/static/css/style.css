@@ -5,7 +5,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    padding-top: 10vh;
+    padding-top: 5vh;
     padding-bottom: 50vh;
 
 
@@ -16,8 +16,7 @@
     padding-left: 1%;
 }
 
-form.input
+.detail 
 {
-    color: #55abb1;
-
+    text-align: center 
 }

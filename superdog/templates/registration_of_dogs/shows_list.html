@@ -6,16 +6,16 @@
 
 <div class="conteiner shows_list">
 
-    <div>
-        <h1 class="display-6">Выставки</h1>
+<div class="detail">
+        <h1 >Exhibitions</h1>
     </div>
 
 <div class="row">
     {% for show in shows_list %}
 
         <div class="col-sm-6">
-            <div class="card border-primary mb-3" style="max-width: 30rem;">
-                <div class="card-header"><a href="{{ show.get_absolute_url }}">{{ show.type_exebition}} </a></div>
+            <div class="card border-primary mb-3" style="max-width: 45rem;">
+                <div class="card-header"><a href="{{ show.get_absolute_url }}"><h2>{{ show.type_exebition}}</h2></a></div>
                     <div class="card-body">
                         <h4 class="card-title">{{ show.date_of_exebition}}</h4>
                         <p class="card-text"> {{ show.address_exebition}}</p>

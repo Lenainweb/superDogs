@@ -80,7 +80,7 @@ class ShowDetail(DetailView):
     """Страница выставки"""
     model = Exebition
     slug_field = "id"
-    context_object_name = 'shows_detail'
+    context_object_name = 'show_detail'
     template_name = "registration_of_dogs/show_detail.html"
 
     
