@@ -64,7 +64,7 @@ class OwnerAdmin(ModelAdmin):
 
 @admin.register(Dog)
 class DogAdmin(ModelAdmin):
-    list_display = ('name_of_dog', 'breed_race', 'name_of_owner', 'date_of_birth')
+    list_display = ('name_of_dog', 'breed_race', 'date_of_birth', 'gender', 'name_of_owner')
     # readonly_fields = ('name_of_dog', 'breed_race', 'name_of_owner', 'date_of_birth')
     list_filter = ('breed_race',)
 

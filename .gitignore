@@ -11,3 +11,4 @@ data
 files/
 *.code-workspace
 media/
+superdog/db.sqlite3

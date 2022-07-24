@@ -42,6 +42,7 @@ class Exebition(models.Model):
     status_of_exebition = models.BooleanField(_("Статус выставки"),  default=True)
     participant_of_exebition = models.ManyToManyField("Dog", verbose_name = _("Участники выставки" ), blank=True)
     # url = models.SlugField(max_length=160, unique=True)
+    # добавить стоимость регистрации
 
     class Meta:
         ordering = ('-date_of_exebition',)
